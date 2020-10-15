@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of VerticalMenuBar</title>
+	<nodes>
+		<node label="html-template">
+			<node label="history">
+				<node label="history.css" icon="cssIcon" url="source/html-template/history/history.css.html"/>
+				<node label="history.js" url="source/html-template/history/history.js.txt"/>
+				<node label="historyFrame.html" icon="htmlIcon" url="source/html-template/history/historyFrame.html"/>
+			</node>
+			<node label="AC_OETags.js" url="source/html-template/AC_OETags.js.txt"/>
+			<node label="index.template.html" icon="htmlIcon" url="source/html-template/index.template.html"/>
+			<node label="playerProductInstall.swf" icon="swfIcon" url="source/html-template/playerProductInstall.swf"/>
+		</node>
+		<node label="libs">
+		</node>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="assets">
+				<node label="fonts">
+					<node label="_LDS_sui generis free.ttf" url="source/assets/fonts/_LDS_sui generis free.ttf"/>
+					<node label="GARA.TTF" url="source/assets/fonts/GARA.TTF"/>
+					<node label="NeoSansIntel-Italic.ttf" url="source/assets/fonts/NeoSansIntel-Italic.ttf"/>
+					<node label="NeoSansIntel-Light.ttf" url="source/assets/fonts/NeoSansIntel-Light.ttf"/>
+					<node label="NeoSansIntel-LightItalic.ttf" url="source/assets/fonts/NeoSansIntel-LightItalic.ttf"/>
+					<node label="NeoSansIntel-Medium.ttf" url="source/assets/fonts/NeoSansIntel-Medium.ttf"/>
+					<node label="NeoSansIntel-MediumItalic.ttf" url="source/assets/fonts/NeoSansIntel-MediumItalic.ttf"/>
+					<node label="NeoSansIntel.ttf" url="source/assets/fonts/NeoSansIntel.ttf"/>
+				</node>
+				<node label="images">
+					<node label="icons">
+						<node label="flyout-left.gif" icon="imageIcon" url="source/assets/images/icons/flyout-left.gif.html"/>
+						<node label="flyout-right.gif" icon="imageIcon" url="source/assets/images/icons/flyout-right.gif.html"/>
+					</node>
+				</node>
+				<node label="skins">
+					<node label="yflexskin">
+						<node label="License.txt" url="source/assets/skins/yflexskin/License.txt"/>
+						<node label="misc.swf" icon="swfIcon" url="source/assets/skins/yflexskin/misc.swf"/>
+						<node label="yflexskin.ai" url="source/assets/skins/yflexskin/yflexskin.ai"/>
+						<node label="yflexskin.css" icon="cssIcon" url="source/assets/skins/yflexskin/yflexskin.css.html"/>
+						<node label="yflexskin.swf" icon="swfIcon" url="source/assets/skins/yflexskin/yflexskin.swf"/>
+					</node>
+					<node label="styles Report.txt" url="source/assets/skins/styles Report.txt"/>
+					<node label="styles.css" icon="cssIcon" url="source/assets/skins/styles.css.html"/>
+					<node label="styles.swf" icon="swfIcon" url="source/assets/skins/styles.swf"/>
+				</node>
+			</node>
+			<node label="com.dougmccune.controls" icon="packageIcon" expanded="true">
+				<node label="VerticalMenuBar.as" icon="actionScriptIcon" url="source/com/dougmccune/controls/VerticalMenuBar.as.html"/>
+			</node>
+			<node label="com.dougmccune.controls.menuClasses" icon="packageIcon" expanded="true">
+				<node label="VerticalMenuItemRenderer.as" icon="actionScriptIcon" url="source/com/dougmccune/controls/menuClasses/VerticalMenuItemRenderer.as.html"/>
+			</node>
+			<node label="com.HAL.Alert" icon="packageIcon" expanded="true">
+				<node label="alert_confirm.gif" icon="imageIcon" url="source/com/HAL/Alert/alert_confirm.gif.html"/>
+				<node label="alert_error.gif" icon="imageIcon" url="source/com/HAL/Alert/alert_error.gif.html"/>
+				<node label="alert_info.gif" icon="imageIcon" url="source/com/HAL/Alert/alert_info.gif.html"/>
+				<node label="AlertPopUp.as" icon="actionScriptIcon" url="source/com/HAL/Alert/AlertPopUp.as.html"/>
+			</node>
+			<node label="com.vzw.controls" icon="packageIcon" expanded="true">
+				<node label="SmartMenuBar.mxml" icon="mxmlIcon" url="source/com/vzw/controls/SmartMenuBar.mxml.html"/>
+				<node label="SmartMenuBarFlyout.mxml" icon="mxmlIcon" url="source/com/vzw/controls/SmartMenuBarFlyout.mxml.html"/>
+				<node label="SmartMenuBarItem.mxml" icon="mxmlIcon" url="source/com/vzw/controls/SmartMenuBarItem.mxml.html"/>
+				<node label="SmartMenuBarTest.as" icon="actionScriptIcon" url="source/com/vzw/controls/SmartMenuBarTest.as.html"/>
+			</node>
+			<node label="com.vzw.controls.menuClasses" icon="packageIcon" expanded="true">
+				<node label="SmartMenuItemRenderer.as" icon="actionScriptIcon" url="source/com/vzw/controls/menuClasses/SmartMenuItemRenderer.as.html"/>
+			</node>
+			<node label="utils" icon="packageIcon" expanded="true">
+				<node label="StringUtils.as" icon="actionScriptIcon" url="source/utils/StringUtils.as.html"/>
+				<node label="XMLUtils.as" icon="actionScriptIcon" url="source/utils/XMLUtils.as.html"/>
+			</node>
+			<node selected="true" label="VerticalMenuTest.mxml" icon="mxmlAppIcon" url="source/VerticalMenuTest.mxml.html"/>
+		</node>
+	</nodes>
+</index>

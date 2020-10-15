@@ -1,0 +1,1 @@
+xgettext index.php todo.class.php content/notebook.php content/menus.php content/settings.php content/search.php content/trash.php content/install.php content/upgrade.php -d $1 -p ./locale/$1/LC_MESSAGES/ -j --add-location

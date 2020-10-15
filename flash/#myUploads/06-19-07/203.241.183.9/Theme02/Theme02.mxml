@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+  [Pepe's Samples] part 2
+
+    Author  : Pepe at Flex User Group in Japan (FxUG).
+              an architect at LINKcom corporation.
+    Blog    : http://Shigeru-Nakagaki.com/
+    FxUG    : http://www.fxug.net/
+    LINKcom : http://www.linkcom.co.jp/ (Japanese only)
+
+    Instructions
+      You can use this sample code in your own responsibility.
+
+-->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	 horizontalScrollPolicy="on" verticalScrollPolicy="on"
+	 layout="vertical" verticalGap="10" width="800" creationComplete="initApp()"
+	 viewSourceURL="srcview/index.html">
+
+<!--
+You don't need to add compile argument of project,
+But you have to include CSS file like below.
+-->
+<mx:Style source="assets/CustomTheme01.css"/>
+
+	<mx:HBox width="100%">
+	
+		<mx:Button label="Button"/>
+		<mx:CheckBox label="CheckBox" selected="true"/>
+		<mx:RadioButton label="RadioButton01" selected="true"/>
+		<mx:RadioButton label="RadionButton02"/>
+		<mx:NumericStepper/>
+		<mx:ComboBox id="cmb" />
+		<mx:ColorPicker/>
+		
+	</mx:HBox>
+	
+	<mx:HBox width="100%">
+	
+		<mx:Label text="Label"/>
+		<mx:DateField/>
+		<mx:Text text="Text"/>
+		<mx:TextInput/>
+		<mx:PopUpButton id="pb" label="PopupButton" width="150"/>
+		<mx:PopUpMenuButton id="pmb" label="PopupButtonMenu" itemClick="pmb.label = event.label" width="150"/>
+		
+	</mx:HBox>
+	
+	<mx:HBox width="100%">
+	
+		<mx:List id="lst" width="200" height="200"></mx:List>
+		<mx:DataGrid id="dgrd" width="320" height="200">
+			<mx:columns>
+				<mx:DataGridColumn headerText="列 1" dataField="col1"/>
+				<mx:DataGridColumn headerText="列 2" dataField="col2"/>
+				<mx:DataGridColumn headerText="列 3" dataField="col3"/>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Tree id="tre" width="200" height="200" />
+		
+	</mx:HBox>
+	
+	<mx:HBox width="100%">
+		<mx:TextArea id="txt" height="200" width="200" wordWrap="false" horizontalScrollPolicy="on" verticalScrollPolicy="on" />
+		<mx:RichTextEditor height="200">
+		</mx:RichTextEditor>
+		<mx:Panel width="200" height="200" layout="absolute" title="Panel">
+		</mx:Panel>
+	</mx:HBox>
+	
+	<mx:HBox width="100%" verticalAlign="middle">
+	
+		<mx:HSlider width="200"/>
+		<mx:VSlider height="50"/>
+		<mx:ProgressBar id="prg01" label="loading..."
+			 trackHeight="10" mode="manual" indeterminate="true"
+			 creationComplete="prg01.setProgress(50,100)"/>
+		<mx:ProgressBar id="prg02" label="loading..."
+			 trackHeight="10" mode="manual" indeterminate="false"
+			 creationComplete="prg02.setProgress(50,100)"/>
+			 
+	</mx:HBox>
+	
+	<mx:HBox width="100%">
+	
+		<mx:Accordion width="200" height="200">
+			<mx:Canvas label="Step 01" width="100%" height="100%">
+			</mx:Canvas>
+			<mx:Canvas label="Step 02" width="100%" height="100%">
+			</mx:Canvas>
+			<mx:Canvas label="Step 03" width="100%" height="100%">
+			</mx:Canvas>
+		</mx:Accordion>
+		
+		<mx:TabNavigator width="200" height="200">
+			<mx:Canvas label="Tab 01" width="100%" height="100%"/>
+			<mx:Canvas label="Tab 02" width="100%" height="100%"/>
+			<mx:Canvas label="Tab 03" width="100%" height="100%"/>
+			<mx:Canvas label="Tab 04" width="100%" height="100%"/>
+			<mx:Canvas label="Tab 05" width="100%" height="100%"/>
+			<mx:Canvas label="Tab 06" width="100%" height="100%"/>
+		</mx:TabNavigator>
+		
+		<mx:VBox>
+			<mx:ButtonBar width="300">
+				<mx:dataProvider>
+					<mx:Array>
+						<mx:String>aaa</mx:String>
+						<mx:String>bbb</mx:String>
+						<mx:String>ccc</mx:String>
+					</mx:Array>
+				</mx:dataProvider>
+			</mx:ButtonBar>
+			<mx:ToggleButtonBar width="300">
+				<mx:dataProvider>
+					<mx:Array>
+						<mx:String>aaa</mx:String>
+						<mx:String>bbb</mx:String>
+						<mx:String>ccc</mx:String>
+					</mx:Array>
+				</mx:dataProvider>
+			</mx:ToggleButtonBar>
+		</mx:VBox>
+
+	</mx:HBox>
+	
+	<mx:HBox width="100%" height="160">
+		<mx:HDividedBox horizontalAlign="center">
+			<mx:TitleWindow label="TitleWindow" height="100" width="200" />
+			<mx:VDividedBox width="400">
+				<mx:Form>
+					<mx:FormItem label="First Name">
+						<mx:TextInput  width="180"/>
+					</mx:FormItem>
+				</mx:Form>
+				<mx:Form>
+					<mx:FormItem label="Last Name">
+						<mx:TextInput  width="180"/>
+					</mx:FormItem>
+				</mx:Form>
+			</mx:VDividedBox>
+		</mx:HDividedBox>
+		<mx:Image source="hoge.jpg" />
+		<mx:SWFLoader source="hoge.swf" />
+	</mx:HBox>
+
+<mx:Script>
+	<![CDATA[
+		import mx.events.MenuEvent;
+		import mx.controls.Menu;
+		import mx.collections.ArrayCollection;
+		import mx.events.ResizeEvent;
+		import mx.controls.Alert;
+		import mx.rpc.events.FaultEvent;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.AsyncToken;
+		import mx.rpc.http.HTTPService;
+		import mx.rpc.events.AbstractEvent;
+		
+		[Embed(source="assets/google-jp.gif")]
+		public var icon_google:Class;
+		
+		[Embed(source="assets/yahoo-jp.gif")]
+		public var icon_yahoo:Class;
+	
+		private var _srv:HTTPService;
+		
+		private function initApp():void
+		{
+			var at:AsyncToken = null;
+			
+			// for TextArea
+			_srv = new HTTPService();
+			_srv.addEventListener(ResultEvent.RESULT,resultHandler);
+			_srv.addEventListener(FaultEvent.FAULT,faultHandler);
+			_srv.url = "data01.xml";
+			at = _srv.send();
+			at.name = "txt";
+			
+			// for DataGrid, List, ComboBox
+			_srv = new HTTPService();
+			_srv.addEventListener(ResultEvent.RESULT,resultHandler);
+			_srv.addEventListener(FaultEvent.FAULT,faultHandler);
+			_srv.url = "data02.xml";
+			at = _srv.send();
+			at.name = "list";
+			
+			// for Tree
+			_srv = new HTTPService();
+			_srv.addEventListener(ResultEvent.RESULT,resultHandler);
+			_srv.addEventListener(FaultEvent.FAULT,faultHandler);
+			_srv.url = "data03.xml";
+			_srv.resultFormat = "e4x";
+			at = _srv.send();
+			at.name = "tree";
+			
+			// for PopupMenuButton, PopUpButton
+			_srv = new HTTPService();
+			_srv.addEventListener(ResultEvent.RESULT,resultHandler);
+			_srv.addEventListener(FaultEvent.FAULT,faultHandler);
+			_srv.url = "data04.xml";
+			_srv.resultFormat = "e4x";
+			at = _srv.send();
+			at.name = "popup";
+			
+		}
+		
+		private function resultHandler(e:ResultEvent):void
+		{
+			switch(e.token.name){
+				case "txt":
+					txt.text = e.result.data;
+					break;
+				case "list":
+					dgrd.dataProvider = e.result.Object;
+					lst.labelField = "col4";
+					lst.dataProvider = e.result.Object;
+					cmb.labelField = "col4";
+					cmb.dataProvider = e.result.Object;
+					break;
+				case "tree":
+					tre.showRoot = false;
+					tre.labelField = "@label";
+					tre.iconField = "@icon";
+					tre.dataProvider = XML(e.result);
+					break;
+				case "popup":
+					pmb.showRoot = false;
+					pmb.labelField = "@label";
+					pmb.dataProvider = XML(e.result);
+					var mn:Menu = new Menu();
+					mn.showRoot = false;
+					mn.labelField = "@label";
+					mn.addEventListener(MenuEvent.ITEM_CLICK,menuClickHandler);
+					mn.dataProvider = XML(e.result);
+					pb.popUp = mn;
+					break;
+			}
+		}
+		
+		private function faultHandler(e:FaultEvent):void
+		{
+			Alert.show(e.token.name + " : " + e.message);
+		}
+		
+		private function menuClickHandler(e:MenuEvent):void
+		{
+			pb.label = e.label;
+		}
+	]]>
+</mx:Script>
+
+</mx:Application>

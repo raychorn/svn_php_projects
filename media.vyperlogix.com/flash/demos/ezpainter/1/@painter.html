@@ -1,0 +1,39 @@
+<html>
+<head><title>rsstwitz</title>
+<script src="http://media.vyperlogix.com/js/flash/AC_OETags.js" type="text/javascript" language="javascript"></script> 
+<script src="http://media.vyperlogix.com/js/rand.js" type="text/javascript" language="javascript"></script> 
+</head>
+<body bgcolor="white">
+<center>
+<div id="div_contents" style="color:black"></div>
+</center>
+<script language="javascript" type="text/javascript"> 
+	var swf_content = generate_flash_content(9,0,0,'http://media.vyperlogix.com/flash/demos/ezpainter/1/@painter.swf',590,500,'@painter','@painter','white');
+	try {
+		var obj = document.getElementById('div_contents');
+		if (obj) {
+			obj.innerHTML = swf_content;
+		} else {
+			alert('WARNING :: Cannot handle your request at this time.');
+		}
+	} catch (e) { };
+	var timerID = -1;
+	function checker() {
+		var obj = document.getElementById('div_contents');
+		if (obj) {
+			if (obj.innerHTML.length == 0) {
+				var toks = window.location.href.split('?');
+				var href = toks[0]+'?x='+rand(32767);
+				window.location.href = href;
+			} else {
+				clearInterval(timerID);
+				timerID = -1;
+			}
+		} else {
+			alert('WARNING :: Cannot handle your request at this time.');
+		}
+	}
+	timerID = setInterval('checker();',5000);
+</script> 
+</body>
+</html>

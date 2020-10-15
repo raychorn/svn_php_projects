@@ -1,0 +1,42 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>EzPayPalDonationButtonDemo.mxml</title>
+<link rel="stylesheet" type="text/css" href="../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="mxmlCdata">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="mxmlComponent">&lt;mx:Application</span> 
+    xmlns:HALPayPal=&quot;<span class="mxmlString">com.HAL.GUI.PayPal.Donations.*</span>&quot;
+    xmlns:mx=&quot;<span class="mxmlString">http://www.adobe.com/2006/mxml</span>&quot; 
+    layout=&quot;<span class="mxmlString">absolute</span>&quot; 
+    <span class="mxmlComponent">&gt;</span>
+    <span class="mxmlTag">&lt;mx:Style</span> source=&quot;<span class="mxmlString">/styles.css</span>&quot;<span class="mxmlTag">/&gt;</span>
+    <span class="mxmlTag">&lt;mx:Script&gt;</span>
+        <span class="asOperator">&lt;!</span><span class="asBracket">[</span>CDATA<span class="asBracket">[</span>
+             <span class="asBracket">[</span>Embed<span class="asBracket">(</span>source<span class="asOperator">=</span><span class="asString">&apos;assets/fonts/NeoSansIntel.ttf&apos;</span>, 
+                fontName<span class="asOperator">=</span><span class="asString">&apos;NeoSansIntel&apos;</span>, 
+                mimeType<span class="asOperator">=</span><span class="asString">&apos;application/x-font&apos;</span>, 
+                flashType<span class="asOperator">=</span><span class="asString">&apos;true&apos;</span>
+            <span class="asBracket">)]</span> 
+            <span class="asBracket">[</span><span class="asMetadata">Bindable</span><span class="asBracket">]</span>
+            <span class="asReserved">private</span> <span class="asVar">var</span> font3<span class="asOperator">:</span>Class;
+        <span class="asBracket">]]</span><span class="asOperator">&gt;</span>
+    <span class="mxmlTag">&lt;/mx:Script&gt;</span>
+    <span class="mxmlComponent">&lt;mx:Panel</span> x=&quot;<span class="mxmlString">10</span>&quot; y=&quot;<span class="mxmlString">10</span>&quot; width=&quot;<span class="mxmlString">300</span>&quot; height=&quot;<span class="mxmlString">339</span>&quot; title=&quot;<span class="mxmlString">PayPal Donation Button Demo</span>&quot; layout=&quot;<span class="mxmlString">absolute</span>&quot;<span class="mxmlComponent">&gt;</span>
+        <span class="mxmlComponent">&lt;mx:VBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot;<span class="mxmlComponent">&gt;</span>
+            <span class="mxmlComponent">&lt;mx:VBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">80%</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;mx:Text</span> text=&quot;<span class="mxmlString">This Demo Requires some minor changes to the html-template for this project.</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot;<span class="mxmlComponent">/&gt;</span>
+                <span class="mxmlComponent">&lt;mx:Spacer/&gt;</span>
+                <span class="mxmlComponent">&lt;mx:Text</span> text=&quot;<span class="mxmlString">Be sure you migrate the code from the html-template to your own project when using this component.</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot;<span class="mxmlComponent">/&gt;</span>
+            <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+            <span class="mxmlComponent">&lt;mx:VBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">20%</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;HALPayPal:PayPalButton&gt;</span>
+                <span class="mxmlComponent">&lt;/HALPayPal:PayPalButton&gt;</span>
+            <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+        <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+    <span class="mxmlComponent">&lt;/mx:Panel&gt;</span>
+<span class="mxmlComponent">&lt;/mx:Application&gt;</span></pre></body>
+</html>

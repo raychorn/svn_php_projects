@@ -1,0 +1,15 @@
+# compress text, html, javascript, css, xml:
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE application/json
+AddOutputFilterByType DEFLATE application/x-po
+
+# CSS and javascript are minimized and compressed using minify
+# AddOutputFilterByType DEFLATE text/css
+# AddOutputFilterByType DEFLATE application/javascript
+# AddOutputFilterByType DEFLATE application/x-javascript
+
+# Or, compress certain file types by extension:
+<Files *.html>
+SetOutputFilter DEFLATE
+</Files>

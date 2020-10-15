@@ -1,0 +1,14 @@
+<client> 
+	<name>Vyper-Twitz(tm)</name> 
+	<version>1.0</version> 
+	<author> 
+		<name>Vyper Logix Corp.</name> 
+		<email>vyper.twitz@vyperlogix.com</email> 
+		<twitter>vyperlogix</twitter> 
+	</author> 
+	<url>http://www.vyperlogix.com</url> 
+	<twitter>vyperlogix</twitter> 
+	<description><![CDATA[ 
+		<p>Vyper-Twitz(tm) is a high-powered Twitter client that allows Vyper-Django(tm) and Vyper-CMS(tm) interface directly with Twitter.com.</p> 
+	]]></description> 
+</client>

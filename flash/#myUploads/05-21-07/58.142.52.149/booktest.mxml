@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+    width="100%" height="100%"
+    initialize="srv.send()">
+
+    <mx:HTTPService id="srv" url="data/data_.xml"/>
+
+    <mx:Model id="results"><gen>{srv.lastResult.data.result}</gen></mx:Model>
+
+    <mx:LineChart
+        id="chart"
+        dataProvider="{results.gen}"
+        showDataTips="true"
+        width="100%"
+        height="100%">
+
+        <mx:fill>
+            <mx:LinearGradient>
+                <mx:angle>90</mx:angle>
+                <mx:entries>
+                    <mx:Array>
+                        <mx:GradientEntry color="0xFFFFFF" ratio="0" alpha="1"/>
+                        <mx:GradientEntry color="0xFFFFDD" ratio="100" alpha="1"/>
+                    </mx:Array>
+                </mx:entries>
+            </mx:LinearGradient>
+        </mx:fill>
+
+        <mx:horizontalAxis>
+            <mx:CategoryAxis dataProvider="{results.gen}" categoryField="month"/>
+        </mx:horizontalAxis>
+
+        <mx:series>
+            <mx:Array>
+                <mx:LineSeries yField="apple" displayName="Apple">
+                    <mx:stroke>
+                        <mx:Stroke color="#84A475" weight="2"/>
+                    </mx:stroke>
+                </mx:LineSeries>
+                <mx:LineSeries yField="orange" displayName="Orange">
+                    <mx:stroke>
+                        <mx:Stroke color="#9DA462" weight="2"/>
+                    </mx:stroke>
+                </mx:LineSeries>
+                <mx:LineSeries yField="banana" displayName="Banana">
+                    <mx:stroke>
+                        <mx:Stroke color="#708EA4" weight="2"/>
+                    </mx:stroke>
+                </mx:LineSeries>
+            </mx:Array>
+        </mx:series>
+
+        <mx:backgroundElements>
+            <mx:Array>
+                <mx:GridLines direction="both">
+                    <mx:verticalStroke>
+                        <mx:Stroke weight="2" color="#FFFFFF"/>
+                    </mx:verticalStroke>
+                    <mx:horizontalFill>
+                        <mx:SolidColor color="0x999966" alpha=".10"/>
+                    </mx:horizontalFill>
+                    <mx:horizontalAlternateFill>
+                        <mx:SolidColor color="0xFFFF66" alpha=".0"/>
+                    </mx:horizontalAlternateFill>
+                </mx:GridLines>
+            </mx:Array>
+        </mx:backgroundElements>
+
+    </mx:LineChart>
+
+</mx:Application>

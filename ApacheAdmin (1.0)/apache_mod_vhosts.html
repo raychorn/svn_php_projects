@@ -1,0 +1,336 @@
+<html>
+<!--Virtual Hosts-->
+<script language=javascript>
+mod_name='Virtual Hosts';
+mod_vrsn='1.0';
+mod_auth='Solomon Rutzky';
+mod_info='This module lets you add, edit, and delete virtual hosts.<br>\n<ul>\n  <li><p>To edit ';
+mod_info+='an existing virtual host, select it from the list and click on the <i>Edit</i> \n';
+mod_info+='button. This will populate the fields below with the current values for the selected\n';
+mod_info+=' virtual host. The <i>Action</i> radio-button will automatically set itself to \n';
+mod_info+='"Update."\n  <li><p>To delete a virtual host, simply select it from the list and click\n';
+mod_info+=' on the <i>Delete</i> button. You will be prompted to confirm the deletion so as to\n';
+mod_info+=' avoid any accidents.\n  <li><p>To add a new VirtualHost, enter in the proper values in the \n';
+mod_info+='fields (only VirtualHost, ServerName, and DocumentRoot are required), make sure that the \n';
+mod_info+='<i>Action</i> radio button is set to Add.  Also, you can type in a domain name (i.e. \n';
+mod_info+='place.com) in the field to the left of the <i>Template</i> button and then click the \n';
+mod_info+='<i>Template</i> button to fill in the rest of the fields below.  If you want to fill in \n';
+mod_info+='a site name such as machine.place.com, then uncheck the <i>Prefix with www.</i> setting \n';
+mod_info+='before clicking the <i>Template</i> button.  Clicking on the <i>Template</i> button will \n';
+mod_info+='automatically set the <i>Action</i> radio button to Add.</ul>\nNotes:<ul>\n  <li><p>\n';
+mod_info+='<u>ServerAdmin:</u> Administrative email address, where problems with the server should be e-mailed.\n';
+mod_info+='  <li><p><u>ErrorLog:</u> The location of the error log file. If this does not start with /, \n';
+mod_info+='ServerRoot is prepended to it.\n  <li><p><u>TransferLog:</u> The location of the access logfile. \n';
+mod_info+='If this does not start with /, ServerRoot is prepended to it.\n  <li><p><u>ServerName:</u> allows you \n';
+mod_info+='to set a host name which is sent back to clients for your server if it\'s different than the one \n';
+mod_info+='the program would get (i.e. use "www" instead of the host\'s real name).  Note: You cannot just \n';
+mod_info+='invent host names and hope they work. The name you define here must be a valid DNS name for your \n';
+mod_info+='host. If you don\'t understand this, ask your network administrator. If your host doesn\'t have a \n';
+mod_info+='registered DNS name, enter its IP address here. You will have to access it by its address (e.g., \n';
+mod_info+='http://123.45.67.89) anyway, and this will make redirections work in a sensible way.\n  <li><p>\n';
+mod_info+='<u>DocumentRoot:</u> The directory out of which you will serve your documents. By default, all requests \n';
+mod_info+='are taken from this directory, but symbolic links and aliases may be used to point to other \n';
+mod_info+='locations.\n  <li><p><u>ScriptAlias:</u> This controls which directories contain server scripts. Format:';
+mod_info+='<br>ScriptAlias /fakename/ /realname/\n</ul>\n';
+mod_date='03/01/1999';
+
+</script>
+ <link rel=stylesheet href=apache_admin.css type=text/css>
+<head>
+<title>Apache Admin Module (vhosts)</title>
+</head>
+<body bgcolor=#ffffff onLoad=create_menu();>
+
+<script language=javascript>
+
+  temp_config=new Array;
+  base_dir='/www/domains/';   //where virtual hosts should be placed
+
+  function create_menu()
+  {
+    document.details.vhost.length=1;
+    num_vhosts=1;
+    for(i=0;i<parent.menu.conf.length;i++)
+      {
+      if(parent.menu.conf[i].substring(0,12).toUpperCase()=='<VIRTUALHOST')
+      {
+        document.details.vhost.options[num_vhosts++]=new Option(parent.menu.conf[i].substring(13,parent.menu.conf[i].indexOf('>',12)),i);
+      }
+    }
+    document.details.vhost.options[0].selected=1;
+    clear_fields();
+    return true;
+  }
+
+  function clear_fields()
+  {
+    document.details.virtualhost.value='';
+    document.details.serveradmin.value='';
+    document.details.scriptalias.value='';
+    document.details.documentroot.value='';
+    document.details.servername.value='';
+    document.details.errorlog.value='';
+    document.details.transferlog.value='';
+    document.details.base_name.value='';
+    return true;
+  }
+
+  function display_entry()
+  {
+    clear_fields();
+    start_line=document.details.vhost.options[document.details.vhost.selectedIndex].value;
+    document.details.virtualhost.value=parent.menu.conf[start_line].substring(parent.menu.conf[start_line].indexOf(' ')+1,parent.menu.conf[start_line].length-1);
+    for(line=++start_line;parent.menu.conf[line].substring(0,14).toUpperCase()!='</VIRTUALHOST>';line++)
+    {
+      opt_value=parent.menu.conf[line].indexOf(' ',1);
+      opt_name=parent.menu.conf[line].substring(0,opt_value).toLowerCase();
+      switch(opt_name)
+      {
+        case 'servername':
+        case 'serveradmin':
+        case 'documentroot':
+        case 'errorlog':
+        case 'transferlog':
+        case 'scriptalias':
+          document.details.elements[opt_name].value=parent.menu.conf[line].substring(opt_value+1,parent.menu.conf[line].length);
+          break;
+        default:
+          alert('The option: "'+parent.menu.conf[line].substring(0,opt_value)+'" is not recognized.  Updating this Virtual Host will erase this option, thus it\'s best to edit this one by hand.');
+          break;
+      }
+    }
+    document.details.au[1].checked=1;
+    return true;
+  }
+
+  function create_template()
+  {
+    www='';
+    if(document.details.pre_www.checked)
+    {
+      www='www.';
+      document.details.virtualhost.value=document.details.base_name.value+' www.'+document.details.base_name.value;
+    }
+    else
+    {
+      document.details.virtualhost.value=document.details.base_name.value;
+    }
+    document.details.serveradmin.value='webmaster@'+document.details.base_name.value;
+    document.details.scriptalias.value='';
+    document.details.documentroot.value=base_dir+document.details.base_name.value;
+    document.details.servername.value=www+document.details.base_name.value;
+    document.details.errorlog.value='logs/error_log-'+www+document.details.base_name.value;
+    document.details.transferlog.value='logs/access_log-'+www+document.details.base_name.value;
+    document.details.au[0].checked=1;
+    return true;
+  }
+
+  function delete_vhost()
+  {
+    if(confirm('Are you sure you want to\ndelete this virtual host?\n'))
+    {
+      for(old=0;old<document.details.vhost.options[document.details.vhost.selectedIndex].value;old++)
+      {
+        temp_config[old]=parent.menu.conf[old];
+      }
+      new_conf=old;
+      for(old;parent.menu.conf[old].substring(0,14).toUpperCase()!='</VIRTUALHOST>';old++);
+      if(!parent.menu.conf[++old].value)
+      {
+        old++;
+      }
+      for(old;old<parent.menu.conf.length;old++)
+      {
+        temp_config[new_conf++]=parent.menu.conf[old];
+      }
+      for(new_conf=0;new_conf<temp_config.length;new_conf++)
+      {
+        parent.menu.conf[new_conf]=temp_config[new_conf];
+      }
+      temp_config.length=0;
+      create_menu();
+      return true;
+    }
+    return false;
+  }
+
+  function check_data()
+  {
+    err='';
+    if(!document.details.virtualhost.value)
+    {
+      err+='VirtualHost Name\n';
+    }
+    if(!document.details.servername.value)
+    {
+      err+='Server Name\n';
+    }
+    if(!document.details.documentroot.value)
+    {
+      err+='Document Root\n';
+    }
+
+    if(err)
+    {
+      alert('You are missing the following fields:\n\n'+err);
+      return false;
+    }
+    return true;
+  }
+
+  function insert_data(new_conf)
+  {
+    temp_config[new_conf++]='<VirtualHost '+document.details.virtualhost.value+'>';
+    temp_config[new_conf++]='ServerName '+document.details.servername.value;
+    temp_config[new_conf++]='DocumentRoot '+document.details.documentroot.value;
+    if(document.details.serveradmin.value)
+    {
+      temp_config[new_conf++]='ServerAdmin '+document.details.serveradmin.value;
+    }
+    if(document.details.scriptalias.value)
+    {
+      temp_config[new_conf++]='ScriptAlias '+document.details.scriptalias.value;
+    }
+    if(document.details.errorlog.value)
+    {
+      temp_config[new_conf++]='ErrorLog '+document.details.errorlog.value;
+    }
+    if(document.details.transferlog.value)
+    {
+      temp_config[new_conf++]='TransferLog '+document.details.transferlog.value;
+    }
+    temp_config[new_conf++]='</VirtualHost>';
+    temp_config[new_conf++]='';
+    return new_conf;
+  }
+
+  function add_vhost()
+  {
+    if(!check_data())
+    {
+      return false;
+    }
+    temp_config.length=0;
+    for(old=document.details.vhost.options[document.details.vhost.length-1].value;parent.menu.conf[old].substring(0,14).toUpperCase()!='</VIRTUALHOST>';old++);
+    old+=2;
+    for(new_conf=0;new_conf<old;new_conf++)
+    {
+      temp_config[new_conf]=parent.menu.conf[new_conf];
+    }
+    new_conf=insert_data(new_conf);
+    for(old;old<parent.menu.conf.length;old++)
+    {
+      temp_config[new_conf++]=parent.menu.conf[old];
+    }
+    for(new_conf=0;new_conf<temp_config.length;new_conf++)
+    {
+      parent.menu.conf[new_conf]=temp_config[new_conf];
+    }
+    temp_config.length=0;
+    create_menu();
+    return true;
+  }
+
+  function update_vhost()
+  {
+    if(!check_data())
+    {
+      return false;
+    }
+    temp_config.length=0;
+    for(new_conf=0;new_conf<document.details.vhost.options[document.details.vhost.selectedIndex].value;new_conf++)
+    {
+      temp_config[new_conf]=parent.menu.conf[new_conf];
+    }
+    old=new_conf;
+    for(old;parent.menu.conf[old].substring(0,14).toUpperCase()!='</VIRTUALHOST>';old++);
+    new_conf=insert_data(new_conf);
+    for(old+=2;old<parent.menu.conf.length;old++)
+    {
+      temp_config[new_conf++]=parent.menu.conf[old];
+    }
+    for(new_conf=0;new_conf<temp_config.length;new_conf++)
+    {
+      parent.menu.conf[new_conf]=temp_config[new_conf];
+    }
+    temp_config.length=0;
+    create_menu();
+    return true;
+  }
+
+</script>
+
+<center>
+
+<FORM ACTION=apache_mod_vhosts.php3 METHOD=POST NAME=details>
+
+<table border=0>
+<tr><td><p>Virtual hosts:</td><td><SELECT NAME=vhost>
+<OPTION VALUE=0>Select one of the following Virtual Hosts to Edit or Delete
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+</SELECT>
+
+<INPUT TYPE=BUTTON NAME=button VALUE=Edit onClick=if(document.details.vhost.selectedIndex){display_entry();}>&nbsp;&nbsp<INPUT TYPE=BUTTON VALUE=Delete onClick=if(document.details.vhost.selectedIndex){delete_vhost();}></td></tr>
+
+<tr><td><p>New host:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<INPUT TYPE=CHECKBOX NAME=pre_www CHECKED></td><td><p> prefix with www.<INPUT TYPE=TEXT NAME=base_name SIZE=30>&nbsp;&nbsp;<INPUT TYPE=BUTTON VALUE=Template onClick=if(document.details.base_name.value.length){create_template();}></td></tr>
+<tr><td colspan=2><br><br></td></tr>
+<tr><td><p>Virtual Host </td><td><INPUT TYPE=TEXT NAME=virtualhost SIZE=35></td></tr>
+<tr><td><p>ServerAdmin </td><td><INPUT TYPE=TEXT NAME=serveradmin SIZE=35></td></tr>
+<tr><td><p>DocumentRoot </td><td><INPUT TYPE=TEXT NAME=documentroot SIZE=35></td></tr>
+<tr><td><p>ServerName </td><td><INPUT TYPE=TEXT NAME=servername SIZE=35></td></tr>
+<tr><td><p>ScriptAlias </td><td><INPUT TYPE=TEXT NAME=scriptalias SIZE=35></td></tr>
+<tr><td><p>ErrorLog </td><td><INPUT TYPE=TEXT NAME=errorlog SIZE=35></td></tr>
+<tr><td><p>TransferLog </td><td><INPUT TYPE=TEXT NAME=transferlog SIZE=35></td></tr>
+<tr><td colspan=2><br></td></tr>
+<tr><td align=right><p>Add <INPUT TYPE=RADIO NAME=au CHECKED><p>Update <INPUT TYPE=RADIO NAME=au></td><td><p>&nbsp;&nbsp;<INPUT NAME=au_button TYPE=BUTTON VALUE=Go onClick=if(document.details.au[0].checked){add_vhost();}else{update_vhost();}>&nbsp;&nbsp;<INPUT TYPE=RESET VALUE="Clear Form"></td></tr>
+</table>
+
+</body>
+</html>

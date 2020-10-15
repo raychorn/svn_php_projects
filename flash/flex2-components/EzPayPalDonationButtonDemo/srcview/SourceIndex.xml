@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of EzPayPalDonationButtonDemo</title>
+	<nodes>
+		<node label="assets">
+			<node label="fonts">
+				<node label="NeoSansIntel.ttf" url="source/assets/fonts/NeoSansIntel.ttf"/>
+			</node>
+		</node>
+		<node label="generated">
+		</node>
+		<node label="DistortionEffects.swc" url="source/DistortionEffects.swc"/>
+		<node label="EzCalendarWidget.swc" url="source/EzCalendarWidget.swc"/>
+		<node label="EzHTTPService.swc" url="source/EzHTTPService.swc"/>
+		<node label="EzLoginWidget.swc" url="source/EzLoginWidget.swc"/>
+		<node label="EzPayPalDonationButton.swc" url="source/EzPayPalDonationButton.swc"/>
+		<node selected="true" label="EzPayPalDonationButtonDemo.mxml" icon="mxmlAppIcon" url="source/EzPayPalDonationButtonDemo.mxml.html"/>
+		<node label="styles.css" icon="cssIcon" url="source/styles.css.html"/>
+		<node label="ViewStackDistortionEffects.swc" url="source/ViewStackDistortionEffects.swc"/>
+	</nodes>
+	<zipfile label="Download source (ZIP, 2056K)" url="EzPayPalDonationButtonDemo.zip"/>
+	<sdklink label="Download Flex 2 SDK" url="http://www.adobe.com/go/flex2_sdk"/>
+</index>

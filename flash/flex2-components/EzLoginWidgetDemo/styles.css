@@ -1,0 +1,120 @@
+/* CSS file */
+Alert{
+	color : #0f3177;
+	backgroundAlpha: 0.7;
+	shadowDistance: 7;
+	title-style-name : “alertTitle”;
+	header-height:19;
+	border-thickness: 1;
+	drop-shadow-enabled: true;
+	drop-shadow-color :#d1ddf7;
+	background-color: #ffffff;
+	corner-radius : 10;
+	border-style :solid;
+	header-colors : #90a4d1, #5970a0;
+	footer-colors : #9db6d9, #ffffff;
+	border-color : #5970a0;
+	message-style-name: "myAlertMessageStyle";
+}
+
+.alertTitle{
+	fontFamily: NeoSansIntel;
+	font-size :14;
+	font-weight :bold;
+	text-align :left;
+	color :#000000;
+}
+
+.myAlertMessageStyle{
+	fontFamily: NeoSansIntel;
+	font-size :14;
+	font-weight :bold;
+	text-align :left;
+	color :#0000ff;
+}
+
+Panel {
+   borderStyle: solid;
+   borderColor: #000000;
+   borderAlpha: 1;
+   borderThickness: 2;
+   roundedBottomCorners: true;
+   cornerRadius: 10;
+   headerHeight: 25;
+   highlightAlphas: 0.3, 0.42;
+   headerColors: #00ffff, #3366ff;
+   backgroundColor: #3366ff;
+   shadowDistance: 6;
+   shadowDirection: right;
+   dropShadowColor: #000000;
+   titleStyleName: "mypanelTitle";
+}
+
+.mypanelTitle {
+	color: #000000;
+	fontFamily:NeoSansIntel;
+	fontSize: 14;
+	fontWeight: bold;
+}
+
+.PanelNoAccess {
+   borderStyle: solid;
+   borderColor: #000000;
+   borderAlpha: 1;
+   borderThickness: 2;
+   roundedBottomCorners: true;
+   cornerRadius: 10;
+   headerHeight: 25;
+   backgroundAlpha: 0.49;
+   highlightAlphas: 0.28, 0.44;
+   headerColors: #ff0000, #ff0000;
+   backgroundColor: #ff0000;
+   shadowDistance: 6;
+   shadowDirection: right;
+   dropShadowColor: #000000;
+   titleStyleName: "mypanelTitle";
+}
+
+.NoAccessText {
+	color: black;
+	fontFamily:NeoSansIntel;
+	fontSize: 24;
+	fontWeight: bold;
+}
+
+Button {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+.LargeButton {
+	fontFamily:NeoSansIntel;
+	fontSize: 20pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+.LoginLabel {
+	color: #000000;
+	fontFamily:NeoSansIntel;
+	fontSize: 14;
+	fontWeight: bold;
+}
+
+ToolTip {
+	fontFamily: NeoSansIntel;
+	cornerRadius: 15;
+	backgroundColor: #ffff99;
+	fontSize: 11;
+}
+
+Text {
+	fontFamily: NeoSansIntel;
+	font-size :14;
+	text-align :left;
+	color :#000000;
+}

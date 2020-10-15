@@ -1,0 +1,37 @@
+# ----------------------------------------------------
+# ----- AUTO EMAIL ME PASSWORD AND DOWNLOAD
+# ----- Version 1.7
+# ----- Created on: 01/30/07
+# ----- Designed by: American Financing
+# ----- http://www.americanfinancing.net
+# ----------------------------------------------------
+
+
+Installation:
+
+Open the output.php file with a text editor and change
+both email addresses "YOUR@EMAILADDRESS.COM to yours.
+
+There are two places that you will see these.
+
+Next, put in the domain name location of the file you
+wish. http://www.YOUR-DOMAIN-NAME.com/DOWNLOADS/FILE-NAME.ZIP
+
+Make sure you rename: $pfw_file_name = "data.csv";
+the data.csv file to something else like mydata.csv so
+no one can view this file. You will also need to rename
+the file data.csv to match this change.
+
+Upload the files to the same directory and chmod data.csv
+or the new named file to 0777 So it can be written to and read.
+
+
+Feel free to modify this script to your needs.
+
+
+You can put this script embeded into your webpage or
+you can use a popup window:
+
+http://javascript.internet.com/generators/popup-window.html
+
+Or you can use an iframe.

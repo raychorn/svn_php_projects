@@ -1,0 +1,36 @@
+/* CSS file */
+Application {
+	fontFamily:NeoSansIntel;
+	fontSize: 10pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+.useSuiGenerisFreeFont {
+	fontFamily:SuiGenerisFree;
+	fontSize: 11pt;
+}
+.useSmallSuiGenerisFreeFont {
+	fontFamily:NeoSansIntel;
+	fontSize: 10pt;
+}
+
+Canvas {
+	fontFamily:SuiGenerisFree;
+	fontSize: 11pt;
+}
+
+Accordion {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+ToggleButtonBar {
+   cornerRadius: 10;
+   dropShadowEnabled: true;
+   shadowDirection: right;
+}

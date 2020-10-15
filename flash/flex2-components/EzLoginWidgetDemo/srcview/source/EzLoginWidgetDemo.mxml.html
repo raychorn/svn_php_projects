@@ -1,0 +1,194 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>EzLoginWidgetDemo.mxml</title>
+<link rel="stylesheet" type="text/css" href="../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="mxmlCdata">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="mxmlComponent">&lt;mx:Application</span> 
+    xmlns:HALGUI=&quot;<span class="mxmlString">com.HAL.GUI.LoginRegisterWidgets.*</span>&quot;
+    xmlns:mx=&quot;<span class="mxmlString">http://www.adobe.com/2006/mxml</span>&quot; 
+    layout=&quot;<span class="mxmlString">absolute</span>&quot; initialize=&quot;onInit<span class="asBracket">()</span>&quot;
+    currentState=&quot;<span class="mxmlString">NotLoggedInState</span>&quot; creationComplete=&quot;onCreationComplete<span class="asBracket">()</span>&quot;
+    <span class="mxmlComponent">&gt;</span>
+    <span class="mxmlComponent">&lt;mx:states&gt;</span>
+        <span class="mxmlComponent">&lt;mx:State</span> name=&quot;<span class="mxmlString">NotLoggedInState</span>&quot;<span class="mxmlComponent">&gt;</span>
+            <span class="mxmlComponent">&lt;mx:RemoveChild</span> target=&quot;<span class="mxmlString">{</span>canvas_NoAccess<span class="mxmlString">}</span>&quot;<span class="mxmlComponent">/&gt;</span>
+            <span class="mxmlComponent">&lt;mx:AddChild</span> position=&quot;<span class="mxmlString">lastChild</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;HALGUI:LoginCanvas</span> id=&quot;<span class="mxmlString">canvas_Login</span>&quot; x=&quot;<span class="mxmlString">{</span><span class="asBracket">(</span>Application.application.width <span class="asOperator">/</span> 2<span class="asBracket">)</span> <span class="asOperator">-</span> <span class="asBracket">(</span><span class="asReserved">this</span>.canvas_Login.width <span class="asOperator">/</span> 2<span class="asBracket">)</span><span class="mxmlString">}</span>&quot; y=&quot;<span class="mxmlString">{</span><span class="asBracket">(</span>Application.application.height <span class="asOperator">/</span> 2<span class="asBracket">)</span> <span class="asOperator">-</span> <span class="asBracket">(</span><span class="asReserved">this</span>.canvas_Login.height <span class="asOperator">/</span> 2<span class="asBracket">)</span><span class="mxmlString">}</span>&quot; width=&quot;<span class="mxmlString">400</span>&quot; height=&quot;<span class="mxmlString">160</span>&quot; redLightImageName=&quot;<span class="mxmlString">assets/images/redLight.gif</span>&quot; greenLightImageName=&quot;<span class="mxmlString">assets/images/greenLight.gif</span>&quot; yellowLightImageName=&quot;<span class="mxmlString">assets/images/yellowLight.gif</span>&quot; creationComplete=&quot;<span class="mxmlString">onCreationCompleteLoginCanvas()</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;/HALGUI:LoginCanvas&gt;</span>
+            <span class="mxmlComponent">&lt;/mx:AddChild&gt;</span>
+            <span class="mxmlComponent">&lt;mx:AddChild</span> position=&quot;<span class="mxmlString">lastChild</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;mx:Panel</span> x=&quot;<span class="mxmlString">10</span>&quot; y=&quot;<span class="mxmlString">10</span>&quot; width=&quot;<span class="mxmlString">308</span>&quot; height=&quot;<span class="mxmlString">421</span>&quot; layout=&quot;<span class="mxmlString">absolute</span>&quot; id=&quot;<span class="mxmlString">panel_Info</span>&quot; title=&quot;<span class="mxmlString">INFO</span>&quot;<span class="mxmlComponent">&gt;</span>
+                    <span class="mxmlComponent">&lt;mx:Text</span> x=&quot;<span class="mxmlString">0</span>&quot; y=&quot;<span class="mxmlString">0</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot; id=&quot;<span class="mxmlString">txt_info</span>&quot;<span class="mxmlComponent">/&gt;</span>
+                <span class="mxmlComponent">&lt;/mx:Panel&gt;</span>
+            <span class="mxmlComponent">&lt;/mx:AddChild&gt;</span>
+        <span class="mxmlComponent">&lt;/mx:State&gt;</span>
+        <span class="mxmlComponent">&lt;mx:State</span> name=&quot;<span class="mxmlString">LoggedInState</span>&quot;<span class="mxmlComponent">&gt;</span>
+            <span class="mxmlComponent">&lt;mx:RemoveChild</span> target=&quot;<span class="mxmlString">{</span>canvas_NoAccess<span class="mxmlString">}</span>&quot;<span class="mxmlComponent">/&gt;</span>
+            <span class="mxmlComponent">&lt;mx:AddChild</span> position=&quot;<span class="mxmlString">lastChild</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;mx:Panel</span> x=&quot;<span class="mxmlString">10</span>&quot; y=&quot;<span class="mxmlString">10</span>&quot; width=&quot;<span class="mxmlString">256</span>&quot; height=&quot;<span class="mxmlString">300</span>&quot; layout=&quot;<span class="mxmlString">absolute</span>&quot; id=&quot;<span class="mxmlString">panel_Info2</span>&quot; title=&quot;<span class="mxmlString">INFO :: LOGGED IN !</span>&quot;<span class="mxmlComponent">&gt;</span>
+                    <span class="mxmlComponent">&lt;mx:VBox</span> height=&quot;<span class="mxmlString">100%</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot;<span class="mxmlComponent">&gt;</span>
+                        <span class="mxmlComponent">&lt;mx:VBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">80%</span>&quot; verticalAlign=&quot;<span class="mxmlString">top</span>&quot;<span class="mxmlComponent">&gt;</span>
+                            <span class="mxmlComponent">&lt;mx:HBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; horizontalAlign=&quot;<span class="mxmlString">center</span>&quot;<span class="mxmlComponent">&gt;</span>
+                                <span class="mxmlComponent">&lt;mx:Text</span> text=&quot;<span class="mxmlString">Text</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot; id=&quot;<span class="mxmlString">txt_info2</span>&quot;<span class="mxmlComponent">/&gt;</span>
+                            <span class="mxmlComponent">&lt;/mx:HBox&gt;</span>
+                        <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+                        <span class="mxmlComponent">&lt;mx:VBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">20%</span>&quot; verticalAlign=&quot;<span class="mxmlString">bottom</span>&quot;<span class="mxmlComponent">&gt;</span>
+                            <span class="mxmlComponent">&lt;mx:HBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; horizontalAlign=&quot;<span class="mxmlString">center</span>&quot;<span class="mxmlComponent">&gt;</span>
+                                <span class="mxmlComponent">&lt;mx:Button</span> label=&quot;<span class="mxmlString">Logout</span>&quot; id=&quot;<span class="mxmlString">btn_logout</span>&quot; click=&quot;onClickLogoutButton<span class="asBracket">()</span>&quot;<span class="mxmlComponent">/&gt;</span>
+                            <span class="mxmlComponent">&lt;/mx:HBox&gt;</span>
+                        <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+                    <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+                <span class="mxmlComponent">&lt;/mx:Panel&gt;</span>
+            <span class="mxmlComponent">&lt;/mx:AddChild&gt;</span>
+        <span class="mxmlComponent">&lt;/mx:State&gt;</span>
+        <span class="mxmlComponent">&lt;mx:State</span> name=&quot;<span class="mxmlString">RegisteredState</span>&quot;<span class="mxmlComponent">&gt;</span>
+            <span class="mxmlComponent">&lt;mx:RemoveChild</span> target=&quot;<span class="mxmlString">{</span>canvas_NoAccess<span class="mxmlString">}</span>&quot;<span class="mxmlComponent">/&gt;</span>
+            <span class="mxmlComponent">&lt;mx:AddChild</span> position=&quot;<span class="mxmlString">lastChild</span>&quot;<span class="mxmlComponent">&gt;</span>
+                <span class="mxmlComponent">&lt;mx:Panel</span> x=&quot;<span class="mxmlString">10</span>&quot; y=&quot;<span class="mxmlString">10</span>&quot; width=&quot;<span class="mxmlString">256</span>&quot; height=&quot;<span class="mxmlString">300</span>&quot; layout=&quot;<span class="mxmlString">absolute</span>&quot; id=&quot;<span class="mxmlString">panel_Info3</span>&quot; title=&quot;<span class="mxmlString">INFO :: REGISTERED !</span>&quot;<span class="mxmlComponent">&gt;</span>
+                    <span class="mxmlComponent">&lt;mx:VBox</span> height=&quot;<span class="mxmlString">100%</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot;<span class="mxmlComponent">&gt;</span>
+                        <span class="mxmlComponent">&lt;mx:VBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">80%</span>&quot; verticalAlign=&quot;<span class="mxmlString">top</span>&quot;<span class="mxmlComponent">&gt;</span>
+                            <span class="mxmlComponent">&lt;mx:HBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot; horizontalAlign=&quot;<span class="mxmlString">center</span>&quot;<span class="mxmlComponent">&gt;</span>
+                                <span class="mxmlComponent">&lt;mx:Text</span> text=&quot;<span class="mxmlString">Text</span>&quot; width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">100%</span>&quot; id=&quot;<span class="mxmlString">txt_info3</span>&quot;<span class="mxmlComponent">/&gt;</span>
+                            <span class="mxmlComponent">&lt;/mx:HBox&gt;</span>
+                        <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+                        <span class="mxmlComponent">&lt;mx:VBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; height=&quot;<span class="mxmlString">20%</span>&quot; verticalAlign=&quot;<span class="mxmlString">bottom</span>&quot;<span class="mxmlComponent">&gt;</span>
+                            <span class="mxmlComponent">&lt;mx:HBox</span> width=&quot;<span class="mxmlString">100%</span>&quot; horizontalAlign=&quot;<span class="mxmlString">center</span>&quot;<span class="mxmlComponent">&gt;</span>
+                                <span class="mxmlComponent">&lt;mx:Button</span> label=&quot;<span class="mxmlString">LogIn</span>&quot; id=&quot;<span class="mxmlString">btn_login</span>&quot; click=&quot;onClickLogoutButton<span class="asBracket">()</span>&quot;<span class="mxmlComponent">/&gt;</span>
+                            <span class="mxmlComponent">&lt;/mx:HBox&gt;</span>
+                        <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+                    <span class="mxmlComponent">&lt;/mx:VBox&gt;</span>
+                <span class="mxmlComponent">&lt;/mx:Panel&gt;</span>
+            <span class="mxmlComponent">&lt;/mx:AddChild&gt;</span>
+        <span class="mxmlComponent">&lt;/mx:State&gt;</span>
+    <span class="mxmlComponent">&lt;/mx:states&gt;</span>
+    <span class="mxmlTag">&lt;mx:Style</span> source=&quot;<span class="mxmlString">styles.css</span>&quot;<span class="mxmlTag">/&gt;</span>
+    <span class="mxmlTag">&lt;mx:Script&gt;</span>
+        <span class="asOperator">&lt;!</span><span class="asBracket">[</span>CDATA<span class="asBracket">[</span>
+            <span class="asReserved">import</span> mx.collections.ArrayCollection;
+            <span class="asReserved">import</span> mx.rpc.events.ResultEvent;
+            <span class="asReserved">import</span> mx.rpc.events.FaultEvent;
+            <span class="asReserved">import</span> com.HAL.Utils.EzObjectExplainer;
+            <span class="asReserved">import</span> com.HAL.Alert.PopUp;
+            <span class="asReserved">import</span> com.HAL.GUI.LoginRegisterWidgets.events.<span class="asOperator">*</span>;
+            <span class="asReserved">import</span> com.HAL.util.EzHTTPService;
+            
+            <span class="asBracket">[</span><span class="asMetadata">Bindable</span><span class="asBracket">]</span>
+            <span class="asReserved">public</span> <span class="asVar">var</span> isLoggedIn<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">false</span>;
+            
+            <span class="asReserved">private</span> <span class="asVar">var</span> bool_EzHTTPService_DebugMode<span class="asOperator">:</span>Boolean <span class="asOperator">=</span> <span class="asReserved">false</span>;
+    
+            <span class="asBracket">[</span><span class="asMetadata">Bindable</span><span class="asBracket">]</span>
+            <span class="asReserved">public</span> <span class="asVar">var</span> srvc<span class="asOperator">:</span>EzHTTPService <span class="asOperator">=</span> <span class="asReserved">new</span> EzHTTPService<span class="asBracket">(</span>bool_EzHTTPService_DebugMode<span class="asBracket">)</span>;
+            
+            <span class="asReserved">private</span> <span class="asReserved">const</span> const_urlLoginRegister<span class="asOperator">:</span>String <span class="asOperator">=</span> <span class="asString">&quot;http://flash.1.ez-ajax.com/php/loginRegister/users.php&quot;</span>;
+            
+            <span class="asReserved">public</span> <span class="asFunction">function</span> AlertShow<span class="asBracket">(</span>msg<span class="asOperator">:</span>String, title<span class="asOperator">:</span>String <span class="asOperator">=</span> <span class="asString">&quot;&quot;</span><span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                com.HAL.Alert.PopUp.error<span class="asBracket">(((</span>msg <span class="asReserved">is</span> String<span class="asBracket">)</span> <span class="asOperator">?</span> msg <span class="asOperator">:</span> <span class="asString">&quot;&quot;</span><span class="asBracket">)</span>, title<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+            
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onFaultHTTPServiceConnector<span class="asBracket">(</span>event<span class="asOperator">:</span>FaultEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asReserved">this</span>.srvc.onFaultHandler<span class="asBracket">(</span>event<span class="asBracket">)</span>;
+            <span class="asBracket">}</span>
+
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onInit<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asReserved">this</span>.srvc.alertShowFunc <span class="asOperator">=</span> <span class="asReserved">this</span>.AlertShow;
+                <span class="asReserved">this</span>.srvc.faultCallBack <span class="asOperator">=</span> <span class="asReserved">this</span>.onFaultHTTPServiceConnector;
+            <span class="asBracket">}</span>
+            
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onCreationComplete<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asReserved">this</span>.currentState <span class="asOperator">=</span> <span class="asBracket">((</span><span class="asReserved">this</span>.isLoggedIn<span class="asBracket">)</span> <span class="asOperator">?</span> <span class="asString">&apos;LoggedInState&apos;</span> <span class="asOperator">:</span> <span class="asString">&apos;NotLoggedInState&apos;</span><span class="asBracket">)</span>;
+                <span class="asReserved">this</span>.txt_info.htmlText <span class="asOperator">=</span> <span class="asString">&quot;This User Login / User Registration sample uses the following components:&lt;br&gt;&lt;br&gt;&lt;UL&gt;&lt;LI&gt;EzHTTPService&lt;/LI&gt;&lt;LI&gt;EzLoginWidget&lt;/LI&gt;&lt;/UL&gt;&lt;br&gt;&lt;br&gt;The EzHTTPService component provides the connectivity with the database via an RPC REST Service and EzLoginWidget component provides the GUI.&lt;br&gt;&lt;br&gt;LOGIN DEMO:&lt;br&gt;&lt;br&gt;Username: Guest&lt;br&gt;Password: Guest&quot;</span>;
+            <span class="asBracket">}</span>
+
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onResultRegisterCompleted<span class="asBracket">(</span>event<span class="asOperator">:</span>ResultEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asReserved">try</span> <span class="asBracket">{</span>
+                    <span class="asVar">var</span> datum<span class="asOperator">:</span>ArrayCollection <span class="asOperator">=</span> <span class="asReserved">this</span>.srvc.makeEventResultIntoArrayCollection<span class="asBracket">(</span>event<span class="asBracket">)</span>;
+                    <span class="asVar">var</span> id<span class="asOperator">:</span>int <span class="asOperator">=</span> datum.source<span class="asBracket">[</span>0<span class="asBracket">]</span>.response.status.code;
+                    <span class="asVar">var</span> msg<span class="asOperator">:</span>String <span class="asOperator">=</span> datum.source<span class="asBracket">[</span>0<span class="asBracket">]</span>.response.status.message;
+                    id <span class="asOperator">=</span> <span class="asBracket">((</span>id <span class="asReserved">is</span> int<span class="asBracket">)</span> <span class="asOperator">?</span> id <span class="asOperator">:</span> 0<span class="asBracket">)</span>;
+                    msg <span class="asOperator">=</span> <span class="asBracket">((</span>msg <span class="asReserved">is</span> String<span class="asBracket">)</span> <span class="asOperator">?</span> msg <span class="asOperator">:</span> <span class="asString">&quot;&quot;</span><span class="asBracket">)</span>;
+                    <span class="asReserved">if</span> <span class="asBracket">(</span>id <span class="asOperator">&lt;</span> 0<span class="asBracket">)</span> <span class="asBracket">{</span>
+                        com.HAL.Alert.PopUp.error<span class="asBracket">(</span> msg.toString<span class="asBracket">()</span>, <span class="asString">&quot;Error Message&quot;</span><span class="asBracket">)</span>;
+                    <span class="asBracket">}</span> <span class="asReserved">else</span> <span class="asBracket">{</span>
+                        <span class="asReserved">this</span>.currentState <span class="asOperator">=</span> <span class="asString">&apos;RegisteredState&apos;</span>;
+                        <span class="asReserved">this</span>.txt_info3.htmlText <span class="asOperator">=</span> <span class="asString">&quot;Congrats !&lt;br&gt;&lt;br&gt;You have been successfully Registered.&quot;</span>;
+                    <span class="asBracket">}</span>
+                <span class="asBracket">}</span> <span class="asReserved">catch</span> <span class="asBracket">(</span>err<span class="asOperator">:</span>Error<span class="asBracket">)</span> <span class="asBracket">{</span>
+                    com.HAL.Alert.PopUp.error<span class="asBracket">(</span> err.toString<span class="asBracket">()</span>, <span class="asString">&quot;Generic Error Message&quot;</span><span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onRegisterCompleted<span class="asBracket">(</span>event<span class="asOperator">:</span>RegisterCompletedEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asReserved">try</span> <span class="asBracket">{</span>
+                    <span class="asReserved">this</span>.srvc.requestObj <span class="asOperator">=</span> <span class="asReserved">new</span> Object<span class="asBracket">()</span>;
+                    <span class="asReserved">this</span>.srvc.requestObj.cmd <span class="asOperator">=</span> <span class="asString">&quot;register&quot;</span>;
+                    <span class="asReserved">this</span>.srvc.requestObj.username <span class="asOperator">=</span> event.datum.username;
+                    <span class="asReserved">this</span>.srvc.requestObj.password <span class="asOperator">=</span> event.datum.password;
+                    <span class="asReserved">this</span>.srvc.requestObj.password2 <span class="asOperator">=</span> event.datum.password;    <span class="asComment">// repeated for the server-side logic - the GUI ensures the repeated password matches the password...
+</span>                    <span class="asReserved">this</span>.srvc.send<span class="asBracket">(</span><span class="asReserved">this</span>.const_urlLoginRegister, onResultRegisterCompleted<span class="asBracket">)</span>;
+                <span class="asBracket">}</span> <span class="asReserved">catch</span> <span class="asBracket">(</span>err<span class="asOperator">:</span>Error<span class="asBracket">)</span> <span class="asBracket">{</span>
+                    com.HAL.Alert.PopUp.error<span class="asBracket">(</span> err.toString<span class="asBracket">()</span>, <span class="asString">&quot;Generic Error Message :: onRegisterCompleted&quot;</span><span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+            
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onClickLogoutButton<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asReserved">this</span>.currentState <span class="asOperator">=</span> <span class="asString">&apos;NotLoggedInState&apos;</span>;
+                <span class="asReserved">this</span>.canvas_Login.currentState <span class="asOperator">=</span> <span class="asString">&apos;&apos;</span>;
+                <span class="asReserved">this</span>.canvas_Login.txt_Password.text <span class="asOperator">=</span> <span class="asString">&quot;&quot;</span>;
+            <span class="asBracket">}</span>
+            
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onResultLoginRequested<span class="asBracket">(</span>event<span class="asOperator">:</span>ResultEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asReserved">try</span> <span class="asBracket">{</span>
+                    <span class="asVar">var</span> datum<span class="asOperator">:</span>ArrayCollection <span class="asOperator">=</span> <span class="asReserved">this</span>.srvc.makeEventResultIntoArrayCollection<span class="asBracket">(</span>event<span class="asBracket">)</span>;
+                    <span class="asVar">var</span> id<span class="asOperator">:</span>int <span class="asOperator">=</span> datum.source<span class="asBracket">[</span>0<span class="asBracket">]</span>.response.status.code;
+                    <span class="asVar">var</span> msg<span class="asOperator">:</span>String <span class="asOperator">=</span> datum.source<span class="asBracket">[</span>0<span class="asBracket">]</span>.response.status.message;
+                    id <span class="asOperator">=</span> <span class="asBracket">((</span>id <span class="asReserved">is</span> int<span class="asBracket">)</span> <span class="asOperator">?</span> id <span class="asOperator">:</span> 0<span class="asBracket">)</span>;
+                    msg <span class="asOperator">=</span> <span class="asBracket">((</span>msg <span class="asReserved">is</span> String<span class="asBracket">)</span> <span class="asOperator">?</span> msg <span class="asOperator">:</span> <span class="asString">&quot;&quot;</span><span class="asBracket">)</span>;
+                    <span class="asReserved">if</span> <span class="asBracket">(</span>id <span class="asOperator">&lt;</span> 0<span class="asBracket">)</span> <span class="asBracket">{</span>
+                        com.HAL.Alert.PopUp.error<span class="asBracket">(</span> msg.toString<span class="asBracket">()</span>, <span class="asString">&quot;Error Message&quot;</span><span class="asBracket">)</span>;
+                    <span class="asBracket">}</span> <span class="asReserved">else</span> <span class="asBracket">{</span>
+                        <span class="asReserved">this</span>.currentState <span class="asOperator">=</span> <span class="asString">&apos;LoggedInState&apos;</span>;
+                        <span class="asReserved">this</span>.txt_info2.htmlText <span class="asOperator">=</span> <span class="asString">&quot;Congrats !&lt;br&gt;&lt;br&gt;You have successfully logged-in.&quot;</span>;
+                    <span class="asBracket">}</span>
+                <span class="asBracket">}</span> <span class="asReserved">catch</span> <span class="asBracket">(</span>err<span class="asOperator">:</span>Error<span class="asBracket">)</span> <span class="asBracket">{</span>
+                    com.HAL.Alert.PopUp.error<span class="asBracket">(</span> err.toString<span class="asBracket">()</span>, <span class="asString">&quot;Generic Error Message :: onResultLoginRequested&quot;</span><span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onLoginRequested<span class="asBracket">(</span>event<span class="asOperator">:</span>LoginRequestedEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asReserved">try</span> <span class="asBracket">{</span>
+                    <span class="asReserved">this</span>.srvc.requestObj <span class="asOperator">=</span> <span class="asReserved">new</span> Object<span class="asBracket">()</span>;
+                    <span class="asReserved">this</span>.srvc.requestObj.cmd <span class="asOperator">=</span> <span class="asString">&quot;login&quot;</span>;
+                    <span class="asReserved">this</span>.srvc.requestObj.username <span class="asOperator">=</span> event.username;
+                    <span class="asReserved">this</span>.srvc.requestObj.password <span class="asOperator">=</span> event.password;
+                    <span class="asReserved">this</span>.srvc.send<span class="asBracket">(</span><span class="asReserved">this</span>.const_urlLoginRegister, onResultLoginRequested<span class="asBracket">)</span>;
+                <span class="asBracket">}</span> <span class="asReserved">catch</span> <span class="asBracket">(</span>err<span class="asOperator">:</span>Error<span class="asBracket">)</span> <span class="asBracket">{</span>
+                    com.HAL.Alert.PopUp.error<span class="asBracket">(</span> err.toString<span class="asBracket">()</span>, <span class="asString">&quot;Generic Error Message :: onLoginRequested&quot;</span><span class="asBracket">)</span>;
+                <span class="asBracket">}</span>
+            <span class="asBracket">}</span>
+            
+            <span class="asReserved">private</span> <span class="asFunction">function</span> onCreationCompleteLoginCanvas<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+                <span class="asVar">var</span> url<span class="asOperator">:</span>String <span class="asOperator">=</span> Application.application.url;
+                <span class="asReserved">this</span>.canvas_Login.url <span class="asOperator">=</span> url;
+                <span class="asReserved">this</span>.canvas_Login.addEventListener<span class="asBracket">(</span>LoginRequestedEvent.TYPE_LOGIN_REQUESTED, onLoginRequested<span class="asBracket">)</span>
+                <span class="asReserved">this</span>.canvas_Login.addEventListener<span class="asBracket">(</span>RegisterCompletedEvent.TYPE_REGISTER_COMPLETED, onRegisterCompleted<span class="asBracket">)</span>
+            <span class="asBracket">}</span>
+        
+             <span class="asBracket">[</span>Embed<span class="asBracket">(</span>source<span class="asOperator">=</span><span class="asString">&apos;assets/fonts/NeoSansIntel.ttf&apos;</span>, 
+                fontName<span class="asOperator">=</span><span class="asString">&apos;NeoSansIntel&apos;</span>, 
+                mimeType<span class="asOperator">=</span><span class="asString">&apos;application/x-font&apos;</span>, 
+                flashType<span class="asOperator">=</span><span class="asString">&apos;true&apos;</span>
+            <span class="asBracket">)]</span> 
+            <span class="asBracket">[</span><span class="asMetadata">Bindable</span><span class="asBracket">]</span>
+            <span class="asReserved">private</span> <span class="asVar">var</span> font3<span class="asOperator">:</span>Class;
+        <span class="asBracket">]]</span><span class="asOperator">&gt;</span>
+    <span class="mxmlTag">&lt;/mx:Script&gt;</span>
+    <span class="mxmlComponent">&lt;HALGUI:AccessDeniedCanvas</span> id=&quot;<span class="mxmlString">canvas_NoAccess</span>&quot; x=&quot;<span class="mxmlString">{</span><span class="asBracket">(</span>Application.application.width <span class="asOperator">/</span> 2<span class="asBracket">)</span> <span class="asOperator">-</span> <span class="asBracket">(</span><span class="asReserved">this</span>.canvas_NoAccess.width <span class="asOperator">/</span> 2<span class="asBracket">)</span><span class="mxmlString">}</span>&quot; y=&quot;<span class="mxmlString">{</span><span class="asBracket">(</span>Application.application.height <span class="asOperator">/</span> 2<span class="asBracket">)</span> <span class="asOperator">-</span> <span class="asBracket">(</span><span class="asReserved">this</span>.canvas_NoAccess.height <span class="asOperator">/</span> 2<span class="asBracket">)</span><span class="mxmlString">}</span>&quot; width=&quot;<span class="mxmlString">400</span>&quot; height=&quot;<span class="mxmlString">200</span>&quot; _buttonIcon=&quot;<span class="mxmlString">@Embed(&apos;assets/images/users_32x32.gif&apos;)</span>&quot;<span class="mxmlComponent">&gt;</span>
+    <span class="mxmlComponent">&lt;/HALGUI:AccessDeniedCanvas&gt;</span>
+<span class="mxmlComponent">&lt;/mx:Application&gt;</span></pre></body>
+</html>

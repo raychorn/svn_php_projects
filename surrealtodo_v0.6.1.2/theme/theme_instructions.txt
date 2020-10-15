@@ -1,0 +1,9 @@
+Simply follow the layout and structure of one of the two provided themes.
+
+Create a directory for your theme under the 'theme' directory (Use underscore for spaces)
+Include all your images for your theme.  (don't link to images in another theme directory)
+CSS file must be named 'styles.css'
+Optionally provide a preview image named 'preview.png' roughly 350x100.  (does not have to be exact)
+Optionally provide a description of your theme in a file named 'info.txt'
+
+Theme will automatically be available in the settings page.

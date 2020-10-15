@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<menuitem label="New" value="N1" />
+	<menuitem label="Open" value="O1"/>
+	<menuitem type="separator"/>
+	<menuitem label="View" value="V1"/>
+	<menuitem label="Window" value="W1" />
+</root>

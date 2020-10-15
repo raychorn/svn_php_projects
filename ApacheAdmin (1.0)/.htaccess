@@ -1,0 +1,4 @@
+AuthName Apache_Admin
+AuthType Basic
+AuthUserFile /full/path/to/authFile
+require valid-user

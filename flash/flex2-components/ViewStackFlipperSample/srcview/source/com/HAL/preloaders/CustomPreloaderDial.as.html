@@ -1,0 +1,169 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>CustomPreloaderDial.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="asPackage">package</span> com.HAL.preloaders <span class="asBracket">{</span>
+    <span class="asReserved">import</span> flash.display.<span class="asOperator">*</span>;
+    <span class="asReserved">import</span> flash.utils.<span class="asOperator">*</span>;
+    <span class="asReserved">import</span> flash.events.<span class="asOperator">*</span>;
+    <span class="asReserved">import</span> flash.net.<span class="asOperator">*</span>;
+    <span class="asReserved">import</span> mx.preloaders.<span class="asOperator">*</span>; 
+    <span class="asReserved">import</span> mx.events.<span class="asOperator">*</span>;
+    <span class="asReserved">import</span> mx.controls.ProgressBar;
+    <span class="asReserved">import</span> flash.text.TextField;
+    <span class="asReserved">import</span> flash.text.TextFormat;
+    <span class="asReserved">import</span> mx.formatters.NumberFormatter;
+    
+    <span class="asReserved">public</span> <span class="asClass">class</span> CustomPreloaderDial <span class="asReserved">extends</span> Sprite <span class="asReserved">implements</span> IPreloaderDisplay <span class="asBracket">{</span>
+        <span class="asComment">// Define a Loader control to load the SWF file.
+</span>        <span class="asReserved">private</span> <span class="asVar">var</span> dpbImageControl<span class="asOperator">:</span>flash.display.Loader;
+
+        <span class="asReserved">private</span> <span class="asVar">var</span> preloaderSprite<span class="asOperator">:</span>Sprite;
+        
+        <span class="asReserved">public</span> <span class="asVar">var</span> progresshandColor<span class="asOperator">:</span>uint <span class="asOperator">=</span> 0x003366;
+
+        <span class="asReserved">public</span> <span class="asVar">var</span> progressHand<span class="asOperator">:</span>Shape;
+        
+        <span class="asReserved">public</span> <span class="asVar">var</span> progressStatus<span class="asOperator">:</span>TextField;
+        
+        <span class="asReserved">public</span> <span class="asVar">var</span> percentFormatter<span class="asOperator">:</span>NumberFormatter <span class="asOperator">=</span> <span class="asReserved">new</span> NumberFormatter<span class="asBracket">()</span>;
+
+        <span class="asReserved">public</span> <span class="asFunction">function</span> CustomPreloaderDial<span class="asBracket">()</span> <span class="asBracket">{</span>   
+            <span class="asReserved">super</span><span class="asBracket">()</span>;        
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> drawHand<span class="asBracket">(</span>hand<span class="asOperator">:</span>Shape, distance<span class="asOperator">:</span>uint, color<span class="asOperator">:</span>uint, thickness<span class="asOperator">:</span>Number<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+            hand.graphics.lineStyle<span class="asBracket">(</span>thickness, color<span class="asBracket">)</span>;
+            hand.graphics.moveTo<span class="asBracket">(</span>0, distance<span class="asBracket">)</span>;
+            hand.graphics.lineTo<span class="asBracket">(</span>0, 0<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asReserved">private</span> <span class="asFunction">function</span> drawDial<span class="asBracket">(</span>aSprite<span class="asOperator">:</span>Sprite<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+            <span class="asVar">var</span> x<span class="asOperator">:</span>int <span class="asOperator">=</span> <span class="asBracket">(</span><span class="asReserved">this</span>.parent.parent.width <span class="asOperator">/</span> 2<span class="asBracket">)</span> <span class="asOperator">-</span> <span class="asBracket">(</span><span class="asReserved">this</span>.stageWidth <span class="asOperator">/</span> 2<span class="asBracket">)</span>;
+            <span class="asVar">var</span> y<span class="asOperator">:</span>int <span class="asOperator">=</span> <span class="asBracket">(</span><span class="asReserved">this</span>.parent.parent.height <span class="asOperator">/</span> 2<span class="asBracket">)</span> <span class="asOperator">-</span> <span class="asBracket">(</span><span class="asReserved">this</span>.stageHeight <span class="asOperator">/</span> 2<span class="asBracket">)</span>;
+
+            aSprite.x <span class="asOperator">=</span> x;
+            aSprite.y <span class="asOperator">=</span> y <span class="asOperator">-</span> <span class="asReserved">this</span>.stageHeight;
+            
+            aSprite.graphics.clear<span class="asBracket">()</span>;
+            
+            aSprite.graphics.lineStyle<span class="asBracket">(</span>1.0, 0x000000, 1.0<span class="asBracket">)</span>;
+            aSprite.graphics.beginFill<span class="asBracket">(</span>0x708CDF, 1.0<span class="asBracket">)</span>;
+            
+            <span class="asVar">var</span> radius<span class="asOperator">:</span>Number <span class="asOperator">=</span> <span class="asReserved">this</span>.stageWidth <span class="asOperator">/</span> 2;
+            aSprite.graphics.drawCircle<span class="asBracket">(</span>radius, radius, radius<span class="asBracket">)</span>;
+            
+            <span class="asVar">var</span> progressShape<span class="asOperator">:</span>Shape <span class="asOperator">=</span> <span class="asReserved">new</span> Shape<span class="asBracket">()</span>;
+            drawHand<span class="asBracket">(</span>progressShape, Math.round<span class="asBracket">(</span>radius <span class="asOperator">*</span> 0.9<span class="asBracket">)</span>, progresshandColor, 3.0<span class="asBracket">)</span>;
+            aSprite.addChild<span class="asBracket">(</span>progressShape<span class="asBracket">)</span>;
+            <span class="asReserved">this</span>.progressHand <span class="asOperator">=</span> progressShape;
+            <span class="asReserved">this</span>.progressHand.x <span class="asOperator">=</span> radius;
+            <span class="asReserved">this</span>.progressHand.y <span class="asOperator">=</span> radius;
+
+            <span class="asReserved">this</span>.progressStatus <span class="asOperator">=</span> <span class="asReserved">new</span> TextField<span class="asBracket">()</span>;
+            <span class="asReserved">this</span>.progressStatus.text <span class="asOperator">=</span> <span class="asString">&quot;+++&quot;</span>;
+            <span class="asReserved">this</span>.progressStatus.x <span class="asOperator">=</span> radius <span class="asOperator">-</span> 20;
+            <span class="asReserved">this</span>.progressStatus.y <span class="asOperator">=</span> radius;
+
+            <span class="asVar">var</span> tf<span class="asOperator">:</span>TextFormat <span class="asOperator">=</span> <span class="asReserved">new</span> TextFormat<span class="asBracket">()</span>;
+            tf.font <span class="asOperator">=</span> <span class="asString">&quot;Arial&quot;</span>;
+            tf.bold <span class="asOperator">=</span> <span class="asString">&quot;true&quot;</span>;
+            tf.size <span class="asOperator">=</span> 12;
+            <span class="asReserved">this</span>.progressStatus.setTextFormat<span class="asBracket">(</span>tf<span class="asBracket">)</span>;
+            aSprite.addChild<span class="asBracket">(</span><span class="asReserved">this</span>.progressStatus<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asComment">// Specify the event listeners.
+</span>        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> preloader<span class="asBracket">(</span>preloaderSprite<span class="asOperator">:</span>Sprite<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+            <span class="asComment">// Listen for the relevant events
+</span>            <span class="asReserved">this</span>.preloaderSprite <span class="asOperator">=</span> preloaderSprite;
+            <span class="asReserved">this</span>.drawDial<span class="asBracket">(</span><span class="asReserved">this</span>.preloaderSprite<span class="asBracket">)</span>;
+            <span class="asReserved">this</span>.preloaderSprite.addEventListener<span class="asBracket">(</span> ProgressEvent.PROGRESS, handleProgress<span class="asBracket">)</span>; 
+            <span class="asReserved">this</span>.preloaderSprite.addEventListener<span class="asBracket">(</span> Event.COMPLETE, handleComplete<span class="asBracket">)</span>;
+    
+            <span class="asReserved">this</span>.preloaderSprite.addEventListener<span class="asBracket">(</span> FlexEvent.INIT_PROGRESS, handleInitProgress<span class="asBracket">)</span>;
+            <span class="asReserved">this</span>.preloaderSprite.addEventListener<span class="asBracket">(</span> FlexEvent.INIT_COMPLETE, handleInitComplete<span class="asBracket">)</span>;
+            <span class="asReserved">this</span>.percentFormatter.precision <span class="asOperator">=</span> 2;
+        <span class="asBracket">}</span>
+        
+        <span class="asComment">// Initialize the Loader control in the override 
+</span>        <span class="asComment">// of IPreloaderDisplay.initialize().
+</span>        <span class="asReserved">public</span> <span class="asFunction">function</span> initialize<span class="asBracket">()</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+        <span class="asBracket">}</span>
+
+        <span class="asComment">// Define empty event listeners.
+</span>        <span class="asReserved">private</span> <span class="asFunction">function</span> handleProgress<span class="asBracket">(</span>event<span class="asOperator">:</span>ProgressEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+            <span class="asVar">var</span> pcent<span class="asOperator">:</span>Number <span class="asOperator">=</span> Math.round<span class="asBracket">(</span>event.bytesLoaded <span class="asOperator">/</span> event.bytesTotal<span class="asBracket">)</span>;
+            <span class="asReserved">this</span>.progressHand.rotation <span class="asOperator">=</span> 180 <span class="asOperator">+</span> <span class="asBracket">(</span>pcent <span class="asOperator">*</span> 360<span class="asBracket">)</span>;
+            <span class="asReserved">this</span>.progressStatus.text <span class="asOperator">=</span> <span class="asReserved">this</span>.percentFormatter.format<span class="asBracket">(</span>pcent <span class="asOperator">*</span> 100<span class="asBracket">)</span> <span class="asOperator">+</span> <span class="asString">&quot;%&quot;</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">private</span> <span class="asFunction">function</span> handleComplete<span class="asBracket">(</span>event<span class="asOperator">:</span>Event<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+            <span class="asReserved">this</span>.preloaderSprite.removeEventListener<span class="asBracket">(</span> ProgressEvent.PROGRESS, handleProgress<span class="asBracket">)</span>; 
+            <span class="asReserved">this</span>.preloaderSprite.removeEventListener<span class="asBracket">(</span> Event.COMPLETE, handleComplete<span class="asBracket">)</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">private</span> <span class="asFunction">function</span> handleInitProgress<span class="asBracket">(</span>event<span class="asOperator">:</span>Event<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">private</span> <span class="asFunction">function</span> handleInitComplete<span class="asBracket">(</span>event<span class="asOperator">:</span>Event<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+            <span class="asVar">var</span> timer<span class="asOperator">:</span>Timer <span class="asOperator">=</span> <span class="asReserved">new</span> Timer<span class="asBracket">(</span>2000,1<span class="asBracket">)</span>;
+            timer.addEventListener<span class="asBracket">(</span>TimerEvent.TIMER, dispatchComplete<span class="asBracket">)</span>;
+            timer.start<span class="asBracket">()</span>;      
+        <span class="asBracket">}</span>
+    
+        <span class="asReserved">private</span> <span class="asFunction">function</span> dispatchComplete<span class="asBracket">(</span>event<span class="asOperator">:</span>TimerEvent<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+            dispatchEvent<span class="asBracket">(</span><span class="asReserved">new</span> Event<span class="asBracket">(</span>Event.COMPLETE<span class="asBracket">))</span>;
+        <span class="asBracket">}</span>
+
+        <span class="asComment">// Implement IPreloaderDisplay interface
+</span>    
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> backgroundColor<span class="asBracket">()</span><span class="asOperator">:</span>uint <span class="asBracket">{</span>
+            <span class="asReserved">return</span> 0;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> backgroundColor<span class="asBracket">(</span>value<span class="asOperator">:</span>uint<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> backgroundAlpha<span class="asBracket">()</span><span class="asOperator">:</span>Number <span class="asBracket">{</span>
+            <span class="asReserved">return</span> 0;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> backgroundAlpha<span class="asBracket">(</span>value<span class="asOperator">:</span>Number<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> backgroundImage<span class="asBracket">()</span><span class="asOperator">:</span>Object <span class="asBracket">{</span>
+            <span class="asReserved">return</span> <span class="asReserved">undefined</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> backgroundImage<span class="asBracket">(</span>value<span class="asOperator">:</span>Object<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> backgroundSize<span class="asBracket">()</span><span class="asOperator">:</span>String <span class="asBracket">{</span>
+            <span class="asReserved">return</span> <span class="asString">&quot;&quot;</span>;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> backgroundSize<span class="asBracket">(</span>value<span class="asOperator">:</span>String<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+        <span class="asBracket">}</span>
+    
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> stageWidth<span class="asBracket">()</span><span class="asOperator">:</span>Number <span class="asBracket">{</span>
+            <span class="asReserved">return</span> 200;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> stageWidth<span class="asBracket">(</span>value<span class="asOperator">:</span>Number<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">get</span> stageHeight<span class="asBracket">()</span><span class="asOperator">:</span>Number <span class="asBracket">{</span>
+            <span class="asReserved">return</span> 200;
+        <span class="asBracket">}</span>
+        
+        <span class="asReserved">public</span> <span class="asFunction">function</span> <span class="asReserved">set</span> stageHeight<span class="asBracket">(</span>value<span class="asOperator">:</span>Number<span class="asBracket">)</span><span class="asOperator">:</span><span class="asReserved">void</span> <span class="asBracket">{</span>
+        <span class="asBracket">}</span>
+    <span class="asBracket">}</span>
+<span class="asBracket">}</span></pre></body>
+</html>

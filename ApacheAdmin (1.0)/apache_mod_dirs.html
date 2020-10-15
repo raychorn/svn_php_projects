@@ -1,0 +1,558 @@
+<html>
+<!--Directories-->
+<script language=javascript>
+mod_name='Directories';
+mod_vrsn='1.0';
+mod_auth='Solomon Rutzky';
+mod_info='This module lets you add, edit, and delete directory permissions.<br>\n';
+mod_date='04/14/1999';
+
+</script>
+ <link rel=stylesheet href=apache_admin.css type=text/css>
+<head>
+  <title>Apache Admin Module (dirs)</title>
+</head>
+<body bgcolor=#ffffff onLoad=create_menu();>
+
+<script language=javascript>
+
+  temp_config=new Array;
+  line_options=0;
+  line_override=0;
+  line_order=0;
+  line_allow=0;
+  line_deny=0;
+
+  function create_menu()
+  {
+    document.details.dir.length=1;
+    num_dirs=1;
+    for(i=0;i<parent.menu.conf.length;i++)
+      {
+      if(parent.menu.conf[i].substring(0,10).toUpperCase()=='<DIRECTORY')
+      {
+        document.details.dir.options[num_dirs++]=new Option(parent.menu.conf[i].substring(11,parent.menu.conf[i].indexOf('>',12)),i);
+      }
+    }
+    document.details.dir.options[0].selected=1;
+    clear_fields();
+    return true;
+  }
+
+  function clear_fields()
+  {
+    document.details.opt_mode_all[0].checked=1;
+    document.details.opt_mode_execcgi[0].checked=1;
+    document.details.opt_mode_followsymlinks[0].checked=1;
+    document.details.opt_mode_symlinksifownermatch[0].checked=1;
+    document.details.opt_mode_includes[0].checked=1;
+    document.details.opt_mode_includesnoexec[0].checked=1;
+    document.details.opt_mode_indexes[0].checked=1;
+    document.details.opt_mode_multiviews[0].checked=1;
+    document.details.directory.value='';
+    document.details.options[0].checked=0;
+    document.details.options[1].checked=0;
+    document.details.opt_all.checked=0;
+    document.details.opt_execcgi.checked=0;
+    document.details.opt_followsymlinks.checked=0;
+    document.details.opt_symlinksifownermatch.checked=0;
+    document.details.opt_includes.checked=0;
+    document.details.opt_includesnoexec.checked=0;
+    document.details.opt_indexes.checked=0;
+    document.details.opt_multiviews.checked=0;
+    document.details.override[0].checked=0;
+    document.details.override[1].checked=0;
+    document.details.override[2].checked=0;
+    document.details.ovr_authconfig.checked=0;
+    document.details.ovr_fileinfo.checked=0;
+    document.details.ovr_indexes.checked=0;
+    document.details.ovr_limit.checked=0;
+    document.details.ovr_options.checked=0;
+    document.details.order.selectedIndex=0;
+    document.details.allow_from.value='';
+    document.details.deny_from.value='';
+    document.details.directory.focus();
+    return true;
+  }
+
+
+  function display_entry()
+  {
+    clear_fields();
+    start_line=document.details.dir.options[document.details.dir.selectedIndex].value;
+    document.details.directory.value=parent.menu.conf[start_line].substring(parent.menu.conf[start_line].indexOf(' ')+1,parent.menu.conf[start_line].length-1);
+    for(line=++start_line;parent.menu.conf[line].substring(0,14).toUpperCase()!='</DIRECTORY>';line++)
+    {
+      opt_value=parent.menu.conf[line].indexOf(' ',1);
+      opt_name=parent.menu.conf[line].substring(0,opt_value).toLowerCase();
+      if(opt_name.substring(0,1)!='#'&&opt_name.substring(0,1)!='')
+      {
+        switch(opt_name)
+        {
+        case 'options':
+          line_options=line;
+          opts=parent.menu.conf[line].substring(opt_value+1,parent.menu.conf[line].length).split(' ');
+          for(x=0;x<opts.length;x++)
+          {
+            if(opts[x].toUpperCase()=='NONE')
+            {
+              document.details.options[0].checked=1;
+              break;
+            }
+            else
+            {
+              document.details.options[1].checked=1;
+              mode=0;
+              if(opts[x].substring(0,1)=='+')
+              {
+                mode=1;
+              }
+              if(opts[x].substring(0,1)=='-')
+              {
+                mode=2;
+              }
+
+              if(!mode)
+              {
+                opt=opts[x].toLowerCase();
+              }
+              else
+              {
+                opt=opts[x].substring(1,opts[x].length).toLowerCase();
+              }
+              switch(opt)
+              {
+                case 'all':
+                  document.details.opt_all.checked=1;
+                  break;
+                case 'execcgi':
+                  document.details.opt_execcgi.checked=1;
+                  break;
+                case 'followsymlinks':
+                  document.details.opt_followsymlinks.checked=1;
+                  break;
+                case 'symlinksifownermatch':
+                  document.details.opt_symlinksifownermatch.checked=1;
+                  break;
+                case 'includes':
+                  document.details.opt_includes.checked=1;
+                  break;
+                case 'includesnoexec':
+                  document.details.opt_includesnoexec.checked=1;
+                  break;
+                case 'indexes':
+                  document.details.opt_indexes.checked=1;
+                  break;
+                case 'multiviews':
+                  document.details.opt_multiviews.checked=1;
+                  break;
+                default:
+                  alert('The following Options parameter is invalid:\n'+opt);
+                  break;
+              }
+              eval('setTimeout("document.details.opt_mode_'+opt+'['+mode+'].checked=1",100);');
+            }
+          }
+          break;
+
+        case 'allowoverride':
+          line_override=line;
+          opts=parent.menu.conf[line].substring(opt_value+1,parent.menu.conf[line].length).split(' ');
+          for(x=0;x<opts.length;x++)
+          {
+            switch(opts[x].toLowerCase())
+            {
+              case 'all':
+                document.details.override[1].checked=1;
+                break;
+              case 'none':
+                document.details.override[0].checked=1;
+                break;
+              case 'authconfig':
+                document.details.ovr_authconfig.checked=1;
+                break;
+              case 'fileinfo':
+                document.details.ovr_fileinfo.checked=1;
+                break;
+              case 'indexes':
+                document.details.ovr_indexes.checked=1;
+                break;
+              case 'limit':
+                document.details.ovr_limit.checked=1;
+                break;
+              case 'option':
+                document.details.ovr_option.checked=1;
+                break;
+              default:
+                alert('The following AllowOverride parameter is invalid:\n'+opt);
+                break;
+            }
+          }
+          break;
+
+        case 'order':
+          line_order=line;
+          if(parent.menu.conf[line].charAt(opt_value+1).toLowerCase()=='a')
+          {
+            document.details.order.selectedIndex=1;
+          }
+          else
+          {
+            document.details.order.selectedIndex=2;
+          }
+          break;
+
+        case 'allow':
+          line_allow=line;
+          document.details.allow_from.value=parent.menu.conf[line].substring(11,parent.menu.conf[line].length);
+          break;
+
+        case 'deny':
+          line_deny=line;
+          document.details.deny_from.value=parent.menu.conf[line].substring(10,parent.menu.conf[line].length);
+          break;
+
+        default:
+          alert('The option: "'+parent.menu.conf[line].substring(0,opt_value)+'" is not recognized.  Updating this Virtual Host will erase this option, thus it\'s best to edit this one by hand.');
+          break;
+        }
+      }
+    }
+    document.details.au[1].checked=1;
+    return true;
+  }
+
+  function delete_dir()
+  {
+    if(confirm('Are you sure you want to\ndelete this directory listing?\n'))
+    {
+      for(old=0;old<document.details.dir.options[document.details.dir.selectedIndex].value;old++)
+      {
+        temp_config[old]=parent.menu.conf[old];
+      }
+      new_conf=old;
+      for(old;parent.menu.conf[old].substring(0,14).toUpperCase()!='</DIRECTORY>';old++);
+      if(!parent.menu.conf[++old].value)
+      {
+        old++;
+      }
+      for(old;old<parent.menu.conf.length;old++)
+      {
+        temp_config[new_conf++]=parent.menu.conf[old];
+      }
+      for(new_conf=0;new_conf<temp_config.length;new_conf++)
+      {
+        parent.menu.conf[new_conf]=temp_config[new_conf];
+      }
+      temp_config.length=0;
+      create_menu();
+      return true;
+    }
+    return false;
+  }
+
+  function check_data()
+  {
+    err='';
+    if(!document.details.directory.value)
+    {
+      err+='full Path for directory\n';
+    }
+
+    if(err)
+    {
+      alert('You are missing the following fields:\n\n'+err);
+      return false;
+    }
+    return true;
+  }
+
+  function check_mode(opt)
+  {
+    mode='';
+    if(eval('document.details.opt_mode_'+opt+'[1].checked'))
+    {
+      mode='+';
+    }
+    if(eval('document.details.opt_mode_'+opt+'[2].checked'))
+    {
+      mode='-';
+    }
+    return mode;
+  }
+
+  function insert_data(new_conf)
+  {
+    temp_config[new_conf++]='<Directory '+document.details.directory.value+'>';
+
+    opt_text='';
+    if(document.details.options[0].checked)
+    {
+      opt_text=' NONE';
+    }
+    else
+    {
+      if(document.details.options[1].checked)
+      {
+        if(document.details.opt_all.checked)
+        {
+          opt_text+=' '+check_mode('all')+'All';
+        }
+        if(document.details.opt_execcgi.checked)
+        {
+          opt_text+=' '+check_mode('execcgi')+'ExecCGI';
+        }
+        if(document.details.opt_followsymlinks.checked)
+        {
+          opt_text+=' '+check_mode('followsymlinks')+'FollowSymLinks';
+        }
+        if(document.details.opt_symlinksifownermatch.checked)
+        {
+          opt_text+=' '+check_mode('symlinksifownermatch')+'SymLinksIfOwnerMatch';
+        }
+        if(document.details.opt_includes.checked)
+        {
+          opt_text+=' '+check_mode('includes')+'Includes';
+        }
+        if(document.details.opt_includesnoexec.checked)
+        {
+          opt_text+=' '+check_mode('includesnoexec')+'IncludesNOEXEC';
+        }
+        if(document.details.opt_indexes.checked)
+        {
+          opt_text+=' '+check_mode('indexes')+'Indexes';
+        }
+        if(document.details.opt_multiviews.checked)
+        {
+          opt_text+=' '+check_mode('multiviews')+'MultiViews';
+        }
+      }
+    }
+    if(opt_text)
+    {
+      temp_config[new_conf++]='Options'+opt_text;
+    }
+
+    opt_text='';
+    if(document.details.override[0].checked)
+    {
+      opt_text=' NONE';
+    }
+    if(document.details.override[1].checked)
+    {
+      opt_text=' ALL';
+    }
+    if(document.details.override[2].checked)
+    {
+      if(document.details.ovr_authconfig.checked)
+      {
+        opt_text+=' AuthConfig';
+      }
+      if(document.details.ovr_fileinfo.checked)
+      {
+        opt_text+=' FileInfo';
+      }
+      if(document.details.ovr_indexes.checked)
+      {
+        opt_text+=' Indexes';
+      }
+      if(document.details.ovr_limit.checked)
+      {
+        opt_text+=' Limit';
+      }
+      if(document.details.ovr_options.checked)
+      {
+        opt_text+=' Options';
+      }
+    }
+    if(opt_text)
+    {
+      temp_config[new_conf++]='AllowOverride'+opt_text;
+    }
+    
+    if(document.details.order.selectedIndex==1)
+    {
+      temp_config[new_conf++]='Order allow,deny';
+    }
+    if(document.details.order.selectedIndex==2)
+    {
+      temp_config[new_conf++]='Order deny,allow';
+    }
+    if(document.details.allow_from.value)
+    {
+      temp_config[new_conf++]='Allow from '+document.details.allow_from.value;
+    }
+    if(document.details.deny_from.value)
+    {
+      temp_config[new_conf++]='Deny from '+document.details.deny_from.value;
+    }
+
+    temp_config[new_conf++]='</Directory>';
+    temp_config[new_conf++]='';
+    return new_conf;
+  }
+
+  function add_dir()
+  {
+    if(!check_data())
+    {
+      return false;
+    }
+    temp_config.length=0;
+    for(old=document.details.dir.options[document.details.dir.length-1].value;parent.menu.conf[old].substring(0,14).toUpperCase()!='</DIRECTORY>';old++);
+    old+=2;
+    for(new_conf=0;new_conf<old;new_conf++)
+    {
+      temp_config[new_conf]=parent.menu.conf[new_conf];
+    }
+    new_conf=insert_data(new_conf);
+    for(old;old<parent.menu.conf.length;old++)
+    {
+      temp_config[new_conf++]=parent.menu.conf[old];
+    }
+    for(new_conf=0;new_conf<temp_config.length;new_conf++)
+    {
+      parent.menu.conf[new_conf]=temp_config[new_conf];
+    }
+    temp_config.length=0;
+    create_menu();
+    return true;
+  }
+
+  function update_dir()
+  {
+    if(!check_data())
+    {
+      return false;
+    }
+    temp_config.length=0;
+    for(new_conf=0;new_conf<document.details.dir.options[document.details.dir.selectedIndex].value;new_conf++)
+    {
+      temp_config[new_conf]=parent.menu.conf[new_conf];
+    }
+    old=new_conf;
+    for(old;parent.menu.conf[old].substring(0,14).toUpperCase()!='</DIRECTORY>';old++);
+    new_conf=insert_data(new_conf);
+    for(old+=2;old<parent.menu.conf.length;old++)
+    {
+      temp_config[new_conf++]=parent.menu.conf[old];
+    }
+    for(new_conf=0;new_conf<temp_config.length;new_conf++)
+    {
+      parent.menu.conf[new_conf]=temp_config[new_conf];
+    }
+    temp_config.length=0;
+    create_menu();
+    document.details.au[0].checked=1;
+    return true;
+  }
+
+</script>
+
+<center>
+
+<FORM METHOD=POST NAME=details>
+
+<table border=0>
+<tr><td><p>Directories:</td><td><SELECT NAME=dir>
+<OPTION VALUE=0>Select one of the following Directories to Edit or Delete
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+</SELECT>
+
+<INPUT TYPE=BUTTON NAME=button VALUE=Edit onClick=if(document.details.dir.selectedIndex){display_entry();}>&nbsp;&nbsp<INPUT TYPE=BUTTON VALUE=Delete onClick=if(document.details.dir.selectedIndex){delete_dir();}></td></tr>
+<tr><td colspan=2><br></td></tr>
+
+<tr><td align=right><p>Path:</td><td><INPUT TYPE=TEXT NAME=directory SIZE=40></td></tr>
+<tr><td colspan=2><br></td></tr>
+
+<tr><td align=right valign=top><p>Options:</td><td><INPUT TYPE=RADIO NAME=options VALUE=0> NONE<br>
+    <INPUT TYPE=RADIO NAME=options VALUE=1> One or more of the following:
+    &nbsp;&nbsp;&nbsp;<table border=1>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=opt_all VALUE=1></td><td><INPUT TYPE=RADIO NAME=opt_mode_all VALUE=0 CHECKED>Default <INPUT TYPE=RADIO NAME=opt_mode_all VALUE=1>+ <INPUT TYPE=RADIO NAME=opt_mode_all VALUE=0>-</td><td> ALL (except MultiViews)</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=opt_execcgi VALUE=1></td><td><INPUT TYPE=RADIO NAME=opt_mode_execcgi VALUE=0 CHECKED>Default <INPUT TYPE=RADIO NAME=opt_mode_execcgi VALUE=1>+ <INPUT TYPE=RADIO NAME=opt_mode_execcgi VALUE=0>-</td><td> ExecCGI</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=opt_followsymlinks VALUE=1></td><td><INPUT TYPE=RADIO NAME=opt_mode_followsymlinks VALUE=0 CHECKED>Default <INPUT TYPE=RADIO NAME=opt_mode_followsymlinks VALUE=1>+ <INPUT TYPE=RADIO NAME=opt_mode_followsymlinks VALUE=0>-</td><td> FollowSymLinks</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=opt_symlinksifownermatch VALUE=1></td><td><INPUT TYPE=RADIO NAME=opt_mode_symlinksifownermatch VALUE=0 CHECKED>Default <INPUT TYPE=RADIO NAME=opt_mode_symlinksifownermatch VALUE=1>+ <INPUT TYPE=RADIO NAME=opt_mode_symlinksifownermatch VALUE=0>-</td><td> SymLinksIfOwnerMatch</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=opt_includes VALUE=1></td><td><INPUT TYPE=RADIO NAME=opt_mode_includes VALUE=0 CHECKED>Default <INPUT TYPE=RADIO NAME=opt_mode_includes VALUE=1>+ <INPUT TYPE=RADIO NAME=opt_mode_includes VALUE=0>-</td><td> Includes</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=opt_includesnoexec VALUE=1></td><td><INPUT TYPE=RADIO NAME=opt_mode_includesnoexec VALUE=0 CHECKED>Default <INPUT TYPE=RADIO NAME=opt_mode_includesnoexec VALUE=1>+ <INPUT TYPE=RADIO NAME=opt_mode_includesnoexec VALUE=0>-</td><td> IncludesNOEXEC</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=opt_indexes VALUE=1></td><td><INPUT TYPE=RADIO NAME=opt_mode_indexes VALUE=0 CHECKED>Default <INPUT TYPE=RADIO NAME=opt_mode_indexes VALUE=1>+ <INPUT TYPE=RADIO NAME=opt_mode_indexes VALUE=0>-</td><td> Indexes</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=opt_multiviews VALUE=1></td><td><INPUT TYPE=RADIO NAME=opt_mode_multiviews VALUE=0 CHECKED>Default <INPUT TYPE=RADIO NAME=opt_mode_multiviews VALUE=1>+ <INPUT TYPE=RADIO NAME=opt_mode_multiviews VALUE=0>-</td><td> MultiViews</td></tr>
+                      </table>
+</td></tr>
+<tr><td colspan=2><br></td></tr>
+
+<tr><td align=right valign=top><p>AllowOverride:</td><td><INPUT TYPE=RADIO NAME=override VALUE=0> NONE<br>
+    <INPUT TYPE=RADIO NAME=override VALUE=2> ALL<br>
+    <INPUT TYPE=RADIO NAME=override VALUE=1> One or more of the following:
+    &nbsp;&nbsp;&nbsp;<table border=1>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=ovr_authconfig VALUE=1></td><td>AuthConfig</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=ovr_fileinfo VALUE=1></td><td>FileInfo</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=ovr_indexes VALUE=1></td><td>Indexes</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=ovr_limit VALUE=1></td><td>Limit</td></tr>
+                      <tr><td><INPUT TYPE=CHECKBOX NAME=ovr_options VALUE=1></td><td>Options</td></tr>
+                      </table>
+</td></tr>
+<tr><td colspan=2><br></td></tr>
+
+<tr><td align=right>Directory Permissions</td><td>&nbsp;</td></tr>
+<tr><td align=right><p>Order:</td><td><SELECT NAME=order>
+                       <OPTION VALUE="">Not Set
+                       <OPTION VALUE="allow,deny">Allow, Deny
+                       <OPTION VALUE="deny,allow">Deny, Allow
+                       </SELECT>
+</td></tr>
+<tr><td align=right><p>Allow from:</td><td><INPUT TYPE=TEXT NAME=allow_from SIZE=40></td></tr>
+<tr><td align=right><p>Deny from:</td><td><INPUT TYPE=TEXT NAME=deny_from SIZE=40></td></tr>
+<tr><td colspan=2><br><br></td></tr>
+
+<tr><td align=right><p>Add <INPUT TYPE=RADIO NAME=au CHECKED><p>Update <INPUT TYPE=RADIO NAME=au></td><td><p>&nbsp;&nbsp;<INPUT NAME=au_button TYPE=BUTTON VALUE=Go onClick=if(document.details.au[0].checked){add_dir();}else{update_dir();}>&nbsp;&nbsp;<INPUT TYPE=RESET VALUE="Clear Form"></td></tr>
+</table>
+
+</body>
+</html>

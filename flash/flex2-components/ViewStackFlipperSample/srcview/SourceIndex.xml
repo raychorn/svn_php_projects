@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of ViewStackFlipperSample</title>
+	<nodes>
+		<node label="assets">
+			<node label="fonts">
+				<node label="_LDS_sui generis free.ttf" url="source/assets/fonts/_LDS_sui generis free.ttf"/>
+				<node label="NeoSansIntel.ttf" url="source/assets/fonts/NeoSansIntel.ttf"/>
+			</node>
+		</node>
+		<node label="com.HAL" icon="packageIcon" expanded="true">
+			<node label="HomePagesViewStack.mxml" icon="mxmlIcon" url="source/com/HAL/HomePagesViewStack.mxml.html"/>
+		</node>
+		<node label="com.HAL.preloaders" icon="packageIcon" expanded="true">
+			<node label="CustomPreloaderDial.as" icon="actionScriptIcon" url="source/com/HAL/preloaders/CustomPreloaderDial.as.html"/>
+		</node>
+		<node label="generated">
+		</node>
+		<node label="DistortionEffects.swc" url="source/DistortionEffects.swc"/>
+		<node label="styles.css" icon="cssIcon" url="source/styles.css.html"/>
+		<node label="ViewStackDistortionEffects.swc" url="source/ViewStackDistortionEffects.swc"/>
+		<node selected="true" label="ViewStackFlipperSample.mxml" icon="mxmlAppIcon" url="source/ViewStackFlipperSample.mxml.html"/>
+	</nodes>
+	<zipfile label="Download source (ZIP, 653K)" url="ViewStackFlipperSample.zip"/>
+	<sdklink label="Download Flex 2 SDK" url="http://www.adobe.com/go/flex2_sdk"/>
+</index>

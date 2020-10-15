@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of EzLoginWidgetDemo</title>
+	<nodes>
+		<node label="assets">
+			<node label="fonts">
+				<node label="NeoSansIntel.ttf" url="source/assets/fonts/NeoSansIntel.ttf"/>
+			</node>
+			<node label="images">
+				<node label="greenLight.gif" icon="imageIcon" url="source/assets/images/greenLight.gif.html"/>
+				<node label="redLight.gif" icon="imageIcon" url="source/assets/images/redLight.gif.html"/>
+				<node label="users_32x32.gif" icon="imageIcon" url="source/assets/images/users_32x32.gif.html"/>
+				<node label="yellowLight.gif" icon="imageIcon" url="source/assets/images/yellowLight.gif.html"/>
+			</node>
+		</node>
+		<node label="generated">
+		</node>
+		<node label="EzCalendarWidget.swc" url="source/EzCalendarWidget.swc"/>
+		<node label="EzHTTPService.swc" url="source/EzHTTPService.swc"/>
+		<node label="EzLoginWidget.swc" url="source/EzLoginWidget.swc"/>
+		<node selected="true" label="EzLoginWidgetDemo.mxml" icon="mxmlAppIcon" url="source/EzLoginWidgetDemo.mxml.html"/>
+		<node label="styles.css" icon="cssIcon" url="source/styles.css.html"/>
+	</nodes>
+	<zipfile label="Download source (ZIP, 1201K)" url="EzLoginWidgetDemo.zip"/>
+	<sdklink label="Download Flex 2 SDK" url="http://www.adobe.com/go/flex2_sdk"/>
+</index>

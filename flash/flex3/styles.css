@@ -1,0 +1,271 @@
+/* CSS file */
+Application {
+	fontFamily:NeoSansIntel;
+	fontSize: 10pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+Tooltip {
+	fontFamily:NeoSansIntel;
+	fontSize: 10pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+	backgroundColor: #ffff99;
+}
+
+Alert{
+	color : #0f3177;
+	backgroundAlpha: 0.7;
+	shadowDistance: 7;
+	title-style-name : “alertTitle”;
+	header-height:19;
+	border-thickness: 1;
+	drop-shadow-enabled: true;
+	drop-shadow-color :#d1ddf7;
+	background-color: #ffffff;
+	corner-radius : 10;
+	border-style :solid;
+	header-colors : #90a4d1, #5970a0;
+	footer-colors : #9db6d9, #ffffff;
+	border-color : #5970a0;
+	message-style-name: "myAlertMessageStyle";
+}
+
+.alertTitle{
+	fontFamily: NeoSansIntel;
+	font-size :14;
+	font-weight :bold;
+	text-align :left;
+	color :#ffffff;
+}
+
+.useSuiGenerisFreeFont {
+	fontFamily:SuiGenerisFree;
+	fontSize: 11pt;
+}
+.useSmallSuiGenerisFreeFont {
+	fontFamily:NeoSansIntel;
+	fontSize: 10pt;
+}
+
+Canvas {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+Accordion {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+.AccordionIcons {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+	fillAlphas: 0.39, 0.82, 0.48, 0.65;
+	fillColors: #0033ff, #0066ff, #0066ff, #0099ff;
+}
+
+ToggleButtonBar {
+   horizontalGap: 2;
+   dropShadowEnabled: true;
+   shadowDirection: right;
+   buttonStyleName: "mytoggleButtonBarButtonStyle";
+   firstButtonStyleName: "mytoggleButtonBarFirstButtonStyle";
+   lastButtonStyleName: "mytoggleButtonBarLastButtonStyle";
+   selectedButtonTextStyleName: "mytoggleButtonBarSelectedButtonStyle";
+}
+
+.mytoggleButtonBarButtonStyle {
+	highlightAlphas: 0.3, 0.22;
+	fontFamily:NeoSansIntel;
+	fontSize: 11pt;
+}
+
+.mytoggleButtonBarFirstButtonStyle {
+	cornerRadius: 10;
+}
+
+.mytoggleButtonBarLastButtonStyle {
+	cornerRadius: 10;
+}
+
+.mytoggleButtonBarSelectedButtonStyle {
+}
+
+TextArea {
+	fontFamily:NeoSansIntel;
+	fontSize: 14pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+	border-style: solid;
+	padding-left: 5;
+	padding-right: 10;
+	padding-bottom: 10;
+}
+
+.SmallTextArea {
+	fontFamily:NeoSansIntel;
+	fontSize: 10pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+	border-style: solid;
+	padding-left: 5;
+	padding-right: 10;
+	padding-bottom: 10;
+}
+
+Button {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+.CalendarTitle {
+	fontFamily:NeoSansIntel;
+	fontSize: 16pt;
+	fontWeight: bold;
+}
+
+.CalendarDaysOfWeek {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	fontWeight: bold;
+}
+
+.CalendarDaysOfMonth {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	fontWeight: bold;
+}
+
+.CalendarCurrentDayOfMonth {
+	fontFamily:NeoSansIntel;
+	fontSize: 16pt;
+	fontWeight: bold;
+}
+
+ProgressBar {
+	fontFamily:NeoSansIntel;
+	fontSize: 16pt;
+	fontWeight: bold;
+}
+
+.DownloadButtonLabel {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	backgroundColor: #cccccc;
+}
+
+.PayPalButton {
+	cornerRadius: 10;
+	highlightAlphas: 0.34, 0.8;
+	fillAlphas: 1, 0.79, 0.67, 0.7;
+	fillColors: #00ff00, #00ffff, #00ffff, #00ffff;
+	color: #000000;
+	borderColor: #999999;
+	themeColor: #00ff00;
+	fontFamily:NeoSansIntel;
+	fontSize: 12;
+}
+
+.FileUploader {
+   borderColor: #0033ff;
+   borderAlpha: 0.7;
+   borderThicknessLeft: 10;
+   borderThicknessTop: 3;
+   borderThicknessBottom: 2;
+   borderThicknessRight: 10;
+   roundedBottomCorners: true;
+   cornerRadius: 10;
+   backgroundAlpha: 1;
+   backgroundColor: #ffff99;
+   shadowDistance: 7;
+   shadowDirection: right;
+   titleStyleName: "mypanelTitle";
+}
+
+.mypanelTitle {
+	fontFamily:NeoSansIntel;
+	font-size: 14;	
+	font-weight :bold;
+}
+
+.myCanvas {
+	fontFamily:NeoSansIntel;
+	fontSize: 11pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+	backgroundColor: #164f9f;
+}
+
+Panel {
+   borderColor: #164f9f;
+   borderAlpha: 0.7;
+   borderThicknessLeft: 10;
+   borderThicknessTop: 3;
+   borderThicknessBottom: 5;
+   borderThicknessRight: 10;
+   roundedBottomCorners: true;
+   cornerRadius: 10;
+   backgroundAlpha: 1;
+   backgroundColor: #ffffff;
+   shadowDistance: 7;
+   shadowDirection: right;
+   titleStyleName: "panelTitle";
+}
+
+.panelTitle {
+	fontFamily:NeoSansIntel;
+	font-size: 14;	
+	font-weight :bold;
+	color: #ffffff;
+}
+
+.myPanel {
+   borderColor: #164f9f;
+   borderAlpha: 0.7;
+   borderThicknessLeft: 10;
+   borderThicknessTop: 3;
+   borderThicknessBottom: 5;
+   borderThicknessRight: 10;
+   roundedBottomCorners: true;
+   cornerRadius: 10;
+   backgroundAlpha: 1;
+   backgroundColor: #164f9f;
+   shadowDistance: 7;
+   shadowDirection: right;
+   titleStyleName: "panelTitle";
+}
+
+.TextLabel14 {
+	fontFamily:NeoSansIntel;
+	fontSize: 14pt;
+	backgroundColor: #000000;
+}
+
+.StyleExplorer {
+	fontFamily:NeoSansIntel;
+	fontSize: 12pt;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+	backgroundColor: #ffff99;
+}
+

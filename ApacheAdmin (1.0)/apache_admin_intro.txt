@@ -1,0 +1,14 @@
+<font size=+2>
+Welcome to the<br>
+</font>
+<font size=+3>
+Apache Administrator
+</font>
+<br>
+<br>
+<font size+2>
+You should be able to find any information you need about<br>
+this application as well as specific information for each<br>
+module by clicking on the <i>Help</i> button.<br>
+<br>
+<br>

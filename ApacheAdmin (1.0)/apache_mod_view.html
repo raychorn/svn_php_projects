@@ -1,0 +1,50 @@
+<html>
+<!--View Config File-->
+<script language=javascript>
+mod_name='View Config File';
+mod_vrsn='1.0';
+mod_auth='Solomon Rutzky';
+mod_info='This module lets you view the entire contents of the config file showing any';
+mod_info+=' changes that have been made so far.\n  There is no editing capability in this';
+mod_info+=' module.\n  Any changes you make will NOT be saved.  You can, however, cut and';
+mod_info+=' paste the contents into a local editor for the purposes of printing or having';
+mod_info+=' a local backup or whatever.\n';
+mod_date='03/01/1999';
+</script>
+
+<script language="javascript">
+
+  function fill_data()
+  {
+    conf_data='';
+    for(i=0;i<parent.menu.conf.length;i++)
+    {
+      conf_data+=parent.menu.conf[i]+"\n";
+    }
+    document.view.data.value=conf_data;
+  }
+
+</script>
+
+<head>
+<title>Apache Admin Module (view)</title>
+<link rel="stylesheet" href="apache_admin.css" type="text/css">
+</head>
+<body bgcolor="#ffffff" onLoad="fill_data();">
+
+<center>
+
+<FORM NAME="view">
+
+<table border="0"><tr><td>
+<p>
+
+<TEXTAREA NAME="data" ROWS="23" COLS="80"></TEXTAREA>
+
+</td></tr>
+</table>
+
+</FORM>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of SingletonDemo</title>
+	<nodes>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="Singletons" icon="packageIcon" expanded="true">
+				<node label="SimplerSingleton.as" icon="actionScriptIcon" url="source/Singletons/SimplerSingleton.as.html"/>
+				<node label="TypicalSingleton.as" icon="actionScriptIcon" url="source/Singletons/TypicalSingleton.as.html"/>
+			</node>
+			<node label="Canvas1.mxml" icon="mxmlIcon" url="source/Canvas1.mxml.html"/>
+			<node selected="true" label="SingletonDemo.mxml" icon="mxmlAppIcon" url="source/SingletonDemo.mxml.html"/>
+		</node>
+	</nodes>
+</index>

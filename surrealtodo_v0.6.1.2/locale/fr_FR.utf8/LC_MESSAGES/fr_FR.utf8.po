@@ -1,0 +1,356 @@
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR : Jeriel BELAICH, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-10 16:11-0600\n"
+"PO-Revision-Date: 2010-12-11 18:21+0100\n"
+"Last-Translator: Jériel BELAÏCH\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: index.php:19
+msgid "requires PHP 5.2 or greater.  Your version is"
+msgstr "La version de PHP 5.2 ou supérieure est requise. Votre version est"
+
+#: index.php:77
+msgid "Notebook"
+msgstr "Bloc-notes"
+
+#: index.php:78
+msgid "Trash"
+msgstr "Corbeille"
+
+#: index.php:79
+msgid "Settings"
+msgstr "Paramètres"
+
+#: index.php:80
+msgid "Search"
+msgstr "Rechercher"
+
+#: todo.class.php:232
+#: todo.class.php:446
+msgid "New Item"
+msgstr "Nouvel élément"
+
+#: todo.class.php:634
+#: content/notebook.php:8
+msgid "New Tab"
+msgstr "Nouvel onglet"
+
+#: todo.class.php:432
+#: content/notebook.php:9
+msgid "New List"
+msgstr "Nouvelle liste"
+
+msgid "Are you sure you want to delete this item?"
+msgstr "Etes-vous sûr de vouloir supprimer cet élément ?"
+
+#: content/notebook.php:29
+msgid "All Items in this List will be deleted."
+msgstr "Tous les éléments de cette liste vont être supprimés."
+
+#: content/notebook.php:30
+msgid "All Lists and Items on this Page will be deleted."
+msgstr "Toutes les listes et tous les éléments de cette page vont être supprimés."
+
+#: content/notebook.php:31
+msgid "All Pages, Lists and Items on this Tab will be deleted."
+msgstr "Toutes les pages, toutes les listes et tous les éléments de cet onglet vont être supprimés."
+
+#: content/menus.php:3
+#: content/menus.php:18
+#: content/menus.php:40
+#: content/menus.php:58
+msgid "Edit"
+msgstr "Editer"
+
+#: content/menus.php:5
+#: content/menus.php:27
+#: content/menus.php:42
+#: content/menus.php:64
+msgid "Delete"
+msgstr "Supprimer"
+
+#: content/menus.php:7
+#: content/menus.php:29
+#: content/menus.php:44
+msgid "Duplicate"
+msgstr "Dupliquer"
+
+#: content/menus.php:9
+#: content/menus.php:31
+#: content/menus.php:49
+#: content/menus.php:66
+msgid "Created"
+msgstr "Créé"
+
+#: content/menus.php:11
+#: content/menus.php:33
+#: content/menus.php:51
+#: content/menus.php:68
+#: content/menus.php:73
+msgid "Set"
+msgstr "Régler"
+
+#: content/settings.php:206
+msgid "Italic"
+msgstr "Italique"
+
+#: content/menus.php:61
+msgid "Mark Complete"
+msgstr "Marquer comme accompli"
+
+#: content/menus.php:62
+msgid "Mark Incomplete"
+msgstr "Marquer comme inachevé"
+
+#: content/menus.php:71
+msgid "Completed"
+msgstr "Accompli"
+
+#: content/settings.php:39
+msgid "Site Name"
+msgstr "Nom du site"
+
+#: content/settings.php:47
+msgid "Date Format"
+msgstr "Format de la date"
+
+#: todo.class.php:815
+msgid "New Page"
+msgstr "Nouvelle page"
+
+#: content/settings.php:72
+msgid "Time Format"
+msgstr "Format de l'heure"
+
+#: content/settings.php:89
+#: content/settings.php:90
+msgid "Time Zone"
+msgstr "Fuseau horaire"
+
+#: content/settings.php:105
+#: content/settings.php:106
+#: content/install.php:20
+msgid "Language"
+msgstr "Langue"
+
+#: content/settings.php:150
+msgid "Theme"
+msgstr "Thème"
+
+#: content/settings.php:218
+msgid "Save"
+msgstr "Enregistrer"
+
+#: content/search.php:4
+msgid "Search Results"
+msgstr "Résultats de la recherche"
+
+#: content/search.php:13
+#: content/trash.php:12
+msgid "Legend"
+msgstr "Légende"
+
+#: content/search.php:15
+#: content/trash.php:14
+msgid "Folder"
+msgstr "Répertoire"
+
+#: content/search.php:17
+#: content/trash.php:16
+msgid "Page"
+msgstr "Page"
+
+#: content/search.php:19
+#: content/trash.php:18
+msgid "List"
+msgstr "Liste"
+
+#: content/search.php:21
+#: content/trash.php:20
+msgid "Item"
+msgstr "Elément"
+
+#: content/trash.php:3
+msgid "Empty Trash"
+msgstr "Vider la corbeille"
+
+#: content/trash.php:4
+msgid "Select All"
+msgstr "Tout sélectionner"
+
+#: content/trash.php:5
+msgid "Delete Selected"
+msgstr "Supprimer la sélection"
+
+#: content/trash.php:6
+msgid "Restore Selected"
+msgstr "Restaurer la sélection"
+
+#: content/trash.php:28
+msgid "Black - Parent (not deleted)"
+msgstr "Noir - Parent (non supprimé)"
+
+#: content/trash.php:29
+msgid "Red - Deleted Object"
+msgstr "Rouge - Objet supprimé"
+
+#: content/trash.php:30
+msgid "Blue - Deleted Child Object"
+msgstr "Bleu - Objet enfant supprimé"
+
+#: content/install.php:62
+msgid "Installation"
+msgstr "Installation"
+
+#: content/install.php:66
+#: content/upgrade.php:22
+msgid "Database connection failed."
+msgstr "Echec de la connexion à la base de données."
+
+#: content/install.php:67
+#: content/upgrade.php:23
+msgid "Edit connect.php and set the mysql database connection information."
+msgstr "Modifier le fichier connect.php et renseigner les informations de connexion à la base de données MySQL."
+
+#: content/install.php:73
+msgid "The database is not empty."
+msgstr "La base de données n'est pas vide."
+
+#: content/install.php:74
+msgid "This install script will not continue."
+msgstr "Le script d'installation va s'interrompre."
+
+#: content/install.php:75
+msgid "currently does not support sharing a database."
+msgstr "ne permet pas actuellement de partager une base de données."
+
+#: content/install.php:79
+msgid "This script will create the needed tables in your database."
+msgstr "Ce script va créer les tables nécessaires dans la base de données."
+
+#: content/install.php:83
+msgid "Install"
+msgstr "Installer"
+
+#: todo.class.php:643
+#: content/install.php:142
+msgid "Main Page"
+msgstr "Page principale"
+
+#: todo.class.php:285
+msgid "Double-click to edit"
+msgstr "Double-cliquer pour éditer"
+
+#: content/install.php:124
+msgid "Main Tab"
+msgstr "Onglet principal"
+
+#: content/upgrade.php:5
+#: content/upgrade.php:13
+#: content/upgrade.php:91
+msgid "Upgrade"
+msgstr "Mettre à jour"
+
+#: content/upgrade.php:77
+msgid "Unable to upgrade versions prior to v0.3"
+msgstr "Impossible de mettre à jour les versions antérieures à v0.3"
+
+#: content/upgrade.php:81
+msgid "Upgrade is not needed."
+msgstr "La mise à jour n'est pas nécessaire."
+
+#: content/install.php:48
+#: content/upgrade.php:82
+#: content/upgrade.php:279
+msgid "Continue"
+msgstr "Continuer"
+
+#: content/upgrade.php:86
+msgid "This script will upgrade your database from version"
+msgstr "Ce script va mettre à jour votre base de données à partir de la version"
+
+#: content/upgrade.php:87
+msgid "Please!  Backup your database before updating."
+msgstr "Attention ! Sauvegardez votre base de données avant la mise à jour."
+
+#: content/upgrade.php:98
+msgid "Unable to upgrade."
+msgstr "Mise à jour impossible."
+
+#: content/upgrade.php:100
+msgid "Your database is at a higher revision than the application."
+msgstr "Votre base de données est à une version supérieure par rapport à l'application."
+
+#: content/upgrade.php:103
+msgid "Unable to determine the version of your database."
+msgstr "Impossible de déterminer la version de votre base de données."
+
+#: content/upgrade.php:278
+msgid "Upgrade Complete"
+msgstr "Mise à jour effectuée"
+
+#: content/notebook.php:29
+msgid "Delete Entire List?"
+msgstr "Supprimer l'intégralité de la liste ?"
+
+#: content/notebook.php:30
+msgid "Delete Entire Page?"
+msgstr "Supprimer l'intégralité de la page ?"
+
+#: content/notebook.php:31
+msgid "Delete Entire Tab?"
+msgstr "Supprimer l'intégralité de l'onglet ?"
+
+#: content/menus.php:19
+msgid "Columns per Page"
+msgstr "Colonnes par page"
+
+#: content/menus.php:46
+msgid "Show Item Dates"
+msgstr "Afficher la date des éléments"
+
+#: content/menus.php:47
+msgid "Hide Item Dates"
+msgstr "Masquer la date des éléments"
+
+#: content/menus.php:59
+msgid "Advanced Edit"
+msgstr "Edition avancée"
+
+#: content/settings.php:202
+msgid "Completed Item Format"
+msgstr "Format d'un élément accompli"
+
+#: content/settings.php:204
+msgid "Strikethrough"
+msgstr "Barré"
+
+#: content/settings.php:208
+msgid "Gray"
+msgstr "Grisé"
+
+#: content/settings.php:210
+msgid "Checkmark"
+msgstr "Marque"
+
+#: content/search.php:194
+msgid "No matches found"
+msgstr "Aucun résultat trouvé"
+
+#: content/search.php:232
+#: content/trash.php:210
+msgid "text trimmed"
+msgstr "texte tronqué"
+
+#: content/trash.php:61
+msgid "Trash is Empty"
+msgstr "La corbeille est vide"
+

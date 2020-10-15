@@ -1,0 +1,311 @@
+<html>
+<!--Locations-->
+<script language=javascript>
+mod_name='Locations';
+mod_vrsn='1.0';
+mod_auth='Solomon Rutzky';
+mod_info='This module lets you add, edit, and delete location settings.<br>\n';
+mod_date='05/05/1999';
+
+</script>
+ <link rel=stylesheet href=apache_admin.css type=text/css>
+<head>
+  <title>Apache Admin Module (locs)</title>
+</head>
+<body bgcolor=#ffffff onLoad=create_menu();>
+
+<script language=javascript>
+
+  temp_config=new Array;
+
+  function create_menu()
+  {
+    document.details.loc.length=1;
+    num_locs=1;
+    for(i=0;i<parent.menu.conf.length;i++)
+      {
+      if(parent.menu.conf[i].substring(0,9).toUpperCase()=='<LOCATION')
+      {
+        document.details.loc.options[num_locs++]=new Option(parent.menu.conf[i].substring(10,parent.menu.conf[i].indexOf('>',10)),i);
+      }
+    }
+    document.details.loc.options[0].selected=1;
+    clear_fields();
+    return true;
+  }
+
+  function clear_fields()
+  {
+    document.details.location.value='';
+    document.details.handler.value='';
+    document.details.order.selectedIndex=0;
+    document.details.allow_from.value='';
+    document.details.deny_from.value='';
+    document.details.location.focus();
+    return true;
+  }
+
+
+  function display_entry()
+  {
+    clear_fields();
+    start_line=document.details.loc.options[document.details.loc.selectedIndex].value;
+    document.details.location.value=parent.menu.conf[start_line].substring(parent.menu.conf[start_line].indexOf(' ')+1,parent.menu.conf[start_line].length-1);
+    for(line=++start_line;parent.menu.conf[line].substring(0,11).toUpperCase()!='</LOCATION>';line++)
+    {
+      opt_value=parent.menu.conf[line].indexOf(' ',1);
+      opt_name=parent.menu.conf[line].substring(0,opt_value).toLowerCase();
+      if(opt_name.substring(0,1)!='#'&&opt_name.substring(0,1)!='')
+      {
+
+        switch(opt_name)
+        {
+        case 'sethandler':
+          document.details.handler.value=parent.menu.conf[line].substring(11,parent.menu.conf[line].length);
+          break;
+
+        case 'order':
+          line_order=line;
+          if(parent.menu.conf[line].charAt(opt_value+1).toLowerCase()=='a')
+          {
+            document.details.order.selectedIndex=1;
+          }
+          else
+          {
+            document.details.order.selectedIndex=2;
+          }
+          break;
+
+        case 'allow':
+          line_allow=line;
+          document.details.allow_from.value=parent.menu.conf[line].substring(11,parent.menu.conf[line].length);
+          break;
+
+        case 'deny':
+          line_deny=line;
+          document.details.deny_from.value=parent.menu.conf[line].substring(10,parent.menu.conf[line].length);
+          break;
+
+        default:
+          alert('The option: "'+parent.menu.conf[line].substring(0,opt_value)+'" is not recognized.  Updating this Virtual Host will erase this option, thus it\'s best to edit this one by hand.');
+          break;
+        }
+      }
+    }
+    document.details.au[1].checked=1;
+    return true;
+  }
+
+  function delete_loc()
+  {
+    if(confirm('Are you sure you want to\ndelete this location listing?\n'))
+    {
+      for(old=0;old<document.details.loc.options[document.details.loc.selectedIndex].value;old++)
+      {
+        temp_config[old]=parent.menu.conf[old];
+      }
+      new_conf=old;
+      for(old;parent.menu.conf[old].substring(0,11).toUpperCase()!='</LOCATION>';old++);
+      if(!parent.menu.conf[++old].value)
+      {
+        old++;
+      }
+      for(old;old<parent.menu.conf.length;old++)
+      {
+        temp_config[new_conf++]=parent.menu.conf[old];
+      }
+      for(new_conf=0;new_conf<temp_config.length;new_conf++)
+      {
+        parent.menu.conf[new_conf]=temp_config[new_conf];
+      }
+      temp_config.length=0;
+      create_menu();
+      return true;
+    }
+    return false;
+  }
+
+  function check_data()
+  {
+    err='';
+    if(!document.details.location.value)
+    {
+      err+='partial URL for location\n';
+    }
+
+    if(err)
+    {
+      alert('You are missing the following fields:\n\n'+err);
+      return false;
+    }
+    return true;
+  }
+
+  function insert_data(new_conf)
+  {
+    temp_config[new_conf++]='<Location '+document.details.location.value+'>';
+
+    if(document.details.handler.value)
+    {
+      temp_config[new_conf++]='SetHandler '+document.details.handler.value;
+    }
+
+    if(document.details.order.selectedIndex==1)
+    {
+      temp_config[new_conf++]='Order allow,deny';
+    }
+    if(document.details.order.selectedIndex==2)
+    {
+      temp_config[new_conf++]='Order deny,allow';
+    }
+    if(document.details.allow_from.value)
+    {
+      temp_config[new_conf++]='Allow from '+document.details.allow_from.value;
+    }
+    if(document.details.deny_from.value)
+    {
+      temp_config[new_conf++]='Deny from '+document.details.deny_from.value;
+    }
+
+    temp_config[new_conf++]='</Location>';
+    temp_config[new_conf++]='';
+    return new_conf;
+  }
+
+  function add_dir()
+  {
+    if(!check_data())
+    {
+      return false;
+    }
+    temp_config.length=0;
+    for(old=document.details.loc.options[document.details.loc.length-1].value;parent.menu.conf[old].substring(0,11).toUpperCase()!='</LOCATION>';old++);
+    old+=2;
+    for(new_conf=0;new_conf<old;new_conf++)
+    {
+      temp_config[new_conf]=parent.menu.conf[new_conf];
+    }
+    new_conf=insert_data(new_conf);
+    for(old;old<parent.menu.conf.length;old++)
+    {
+      temp_config[new_conf++]=parent.menu.conf[old];
+    }
+    for(new_conf=0;new_conf<temp_config.length;new_conf++)
+    {
+      parent.menu.conf[new_conf]=temp_config[new_conf];
+    }
+    temp_config.length=0;
+    create_menu();
+    return true;
+  }
+
+  function update_dir()
+  {
+    if(!check_data())
+    {
+      return false;
+    }
+    temp_config.length=0;
+    for(new_conf=0;new_conf<document.details.loc.options[document.details.loc.selectedIndex].value;new_conf++)
+    {
+      temp_config[new_conf]=parent.menu.conf[new_conf];
+    }
+    old=new_conf;
+    for(old;parent.menu.conf[old].substring(0,11).toUpperCase()!='</LOCATION>';old++);
+    new_conf=insert_data(new_conf);
+    for(old+=2;old<parent.menu.conf.length;old++)
+    {
+      temp_config[new_conf++]=parent.menu.conf[old];
+    }
+    for(new_conf=0;new_conf<temp_config.length;new_conf++)
+    {
+      parent.menu.conf[new_conf]=temp_config[new_conf];
+    }
+    temp_config.length=0;
+    create_menu();
+    return true;
+  }
+
+</script>
+
+<center>
+
+<FORM METHOD=POST NAME=details>
+
+<table border=0>
+<tr><td><p>Locations:</td><td><SELECT NAME=loc>
+<OPTION VALUE=0>Select one of the following Directories to Edit or Delete
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+<OPTION>
+</SELECT>
+
+<INPUT TYPE=BUTTON NAME=button VALUE=Edit onClick=if(document.details.loc.selectedIndex){display_entry();}>&nbsp;&nbsp<INPUT TYPE=BUTTON VALUE=Delete onClick=if(document.details.loc.selectedIndex){delete_dir();}></td></tr>
+<tr><td colspan=2><br></td></tr>
+
+<tr><td align=right><p>URL:</td><td><INPUT TYPE=TEXT NAME=location SIZE=40></td></tr>
+<tr><td colspan=2><br></td></tr>
+
+<tr><td align=right><p>SetHandler:</td><td><INPUT TYPE=TEXT NAME=handler SIZE=40></td></tr>
+<tr><td colspan=2><br></td></tr>
+
+<tr><td align=right><p>Order:</td><td><SELECT NAME=order>
+                       <OPTION VALUE="">Not Set
+                       <OPTION VALUE="allow,deny">Allow, Deny
+                       <OPTION VALUE="deny,allow">Deny, Allow
+                       </SELECT>
+</td></tr>
+<tr><td align=right><p>Allow from:</td><td><INPUT TYPE=TEXT NAME=allow_from SIZE=40></td></tr>
+<tr><td align=right><p>Deny from:</td><td><INPUT TYPE=TEXT NAME=deny_from SIZE=40></td></tr>
+<tr><td colspan=2><br><br></td></tr>
+
+<tr><td align=right><p>Add <INPUT TYPE=RADIO NAME=au CHECKED><p>Update <INPUT TYPE=RADIO NAME=au></td><td><p>&nbsp;&nbsp;<INPUT NAME=au_button TYPE=BUTTON VALUE=Go onClick=if(document.details.au[0].checked){add_dir();}else{update_dir();}>&nbsp;&nbsp;<INPUT TYPE=RESET VALUE="Clear Form"></td></tr>
+</table>
+
+</body>
+</html>

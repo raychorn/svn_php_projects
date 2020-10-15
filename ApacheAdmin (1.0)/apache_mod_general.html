@@ -1,0 +1,331 @@
+<html>
+<!--General-->
+<script language=javascript>
+mod_name='General';
+mod_vrsn='1.0';
+mod_auth='Solomon Rutzky';
+mod_info='This module lets you edit the General Server Config settings.<br>\n';
+mod_date='09/05/1999';
+
+</script>
+  <link rel="stylesheet" href="apache_admin.css" type="text/css">
+<head>
+  <title>Apache Admin Module (general)</title>
+</head>
+<body bgcolor="#ffffff" onLoad="scan_config();">
+
+<script language="javascript">
+
+  parm_list=':ResourceConfig,s:AccessConfig,s:ServerAdmin,s:HostNameLookups,o:ServerName,s:ServerRoot,s:KeepAlive,o:MaxKeepAliveRequests,s:KeepAliveTimeout,s:MaxRequestsPerChild,s:LoadModule,m';
+  temp_config=new Array;
+
+  parm_ref=new Array;
+  parm_vals=new Array;
+  parm_list_tmp=parm_list.split(':');
+  for(x=1;x<parm_list_tmp.length;x++)
+  {
+    parm_tmp=parm_list_tmp[x].split(',');
+    parm_vals[x]=new Array;
+    parm_vals[x][0]=parm_tmp[0];
+    parm_vals[x][1]=parm_tmp[1];
+    parm_vals[x][2]=new Array;
+    parm_ref[parm_tmp[0].toLowerCase()]=x;
+  }
+  parm_list_tmp=null;
+  parm_tmp=null;
+
+  function scan_config()
+  {
+    level=0;
+    for(x=1;x<parm_vals.length;x++)
+    {
+      parm_vals[x][2].length=0;
+    }
+
+    for(line=0;line<parent.menu.conf.length;line++)
+    {
+      switch(parent.menu.conf[line].charAt(0))
+      {
+        case '#':
+        case ' ':
+        case '':
+          break;
+        case '<':
+          if(parent.menu.conf[line].substring(0,2)=='</')
+          {
+            level--;
+          }
+          else
+          {
+            level++;
+          }
+          break;
+        default:
+          if(!level)
+          {
+            opt_value=parent.menu.conf[line].indexOf(' ',1);
+            opt_name=parent.menu.conf[line].substring(0,opt_value).toLowerCase();
+            if(ind=parm_ref[opt_name])
+            {
+              parm_vals[ind][2][parm_vals[ind][2].length]=new Array;
+              parm_vals[ind][2][parm_vals[ind][2].length-1][0]=line;
+              parm_vals[ind][2][parm_vals[ind][2].length-1][1]=parent.menu.conf[line].substring(opt_value+1,parent.menu.conf[line].length);
+            }
+          }
+      }
+    }
+//    for(i=1;i<parm_vals.length;i++) { alert(parm_vals[i][2][0][1]); }
+    display_entry();
+    return true;
+  }
+
+  function display_entry()
+  {
+    for(x=1;x<parm_vals.length;x++)
+    {
+      if(parm_vals[x][2].length)
+      {
+        switch(parm_vals[x][1])
+        {
+          case 's':
+            document.details.elements[parm_vals[x][0].toLowerCase()].value=parm_vals[x][2][0][1];
+            break;
+          case 'm':
+            document.details.elements[parm_vals[x][0].toLowerCase()].value='';
+            for(i=0;i<parm_vals[x][2].length;i++)
+            {
+              document.details.elements[parm_vals[x][0].toLowerCase()].value+=parm_vals[x][2][i][1]+'\n';
+            }
+            break;
+          case 'o':
+            select=0;
+            switch(parm_vals[x][2][0][1].toLowerCase())
+            {
+              case 'on':
+                select=1;
+                break;
+              case 'off':
+                select=2;
+                break;
+            }
+            document.details.elements[parm_vals[x][0].toLowerCase()].selectedIndex=select;
+            break;
+        }
+      }
+    }
+    return true;
+  }
+
+
+  function make_changes()
+  {
+    to_insert=new Array;
+    to_update=new Array;
+    to_delete='/';
+
+    for(x=1;x<parm_vals.length;x++)
+    {
+      num_old_vals=parm_vals[x][2].length;
+      parm=parm_vals[x][0].toLowerCase();
+
+      switch(parm_vals[x][1])
+      {
+        case 'm':
+          new_vals=new Array;
+          new_vals_tmp=document.details.elements[parm].value.split('\n');
+          for(i=0;i<new_vals_tmp.length;i++)
+          {
+            if(new_vals_tmp[i]!='')
+            {
+              new_vals[new_vals.length]=new_vals_tmp[i];
+            }
+          }
+          new_vals_tmp.length=0;
+          num_new_vals=new_vals.length;
+
+          if(num_old_vals!=num_new_vals)
+          {
+            if(num_old_vals>num_new_vals)
+            {
+              update_multiple(num_new_vals);
+              for(i=num_new_vals;i<num_old_vals;i++)
+              {
+                to_delete+=parm_vals[x][2][i][0]+'/';
+              }
+            }
+            else
+            {
+              update_multiple(num_old_vals);
+              for(i=num_old_vals;i<num_new_vals;i++)
+              {
+                to_insert[to_insert.length]=parm_vals[x][0]+" "+new_vals[i];
+              }
+            }
+          }
+          else
+          {
+            update_multiple(num_new_vals);
+          }
+          break;
+        case 'o':
+          selected=document.details.elements[parm].selectedIndex;
+          if(num_old_vals)
+          {
+            if(!selected)
+            {
+              to_delete+=parm_vals[x][2][0][0]+'/';
+            }
+            else
+            {
+              if(parm_vals[x][2][0][1].toLowerCase()!=document.details.elements[parm].options[selected].value.toLowerCase())
+              {
+                to_update[to_update.length]=new Array;
+                to_update[to_update.length-1][0]=parm_vals[x][2][0][0];
+                to_update[to_update.length-1][1]=parm_vals[x][0]+" "+document.details.elements[parm].options[selected].value;
+              }
+            }
+          }
+          else
+          {
+            if(selected)
+            {
+              to_insert[to_insert.length]=parm_vals[x][0]+" "+document.details.elements[parm].options[selected].value;
+            }
+          }
+          break;
+        case 's':
+          if(num_old_vals)
+          {
+            if(!document.details.elements[parm].value)
+            {
+              to_delete+=parm_vals[x][2][0][0]+'/';
+            }
+            else
+            {
+              if(parm_vals[x][2][0][1]!=document.details.elements[parm].value)
+              {
+                to_update[to_update.length]=new Array;
+                to_update[to_update.length-1][0]=parm_vals[x][2][0][0];
+                to_update[to_update.length-1][1]=parm_vals[x][0]+" "+document.details.elements[parm].value;
+              }
+            }
+          }
+          else
+          {
+            if(document.details.elements[parm].value)
+            {
+              to_insert[to_insert.length]=parm_vals[x][0]+" "+document.details.elements[parm].value;
+            }
+          }
+          break;
+      }
+    }
+
+    if(to_update.length)
+    {
+      update_data();
+    }
+    if(to_delete.length>1)
+    {
+      delete_data();
+    }
+    if(to_insert.length)
+    {
+      insert_data();
+    }
+    scan_config();
+  }
+
+  function update_multiple(limit)
+  {
+    for(i=0;i<limit;i++)
+    {
+      to_update[to_update.length]=new Array;
+      to_update[to_update.length-1][0]=parm_vals[x][2][i][0];
+      to_update[to_update.length-1][1]=parm_vals[x][0]+" "+new_vals[i];
+    }
+  }
+
+  function update_data()
+  {
+    for(x=0;x<to_update.length;x++)
+    {
+      parent.menu.conf[to_update[x][0]]=to_update[x][1];
+    }
+    return true;
+  }
+
+  function delete_data()
+  {
+    new_conf=0;
+    for(old=0;old<parent.menu.conf.length;old++)
+    {
+      if(to_delete.indexOf('/'+old+'/')<0)
+      {
+        temp_config[new_conf++]=parent.menu.conf[old];
+      }
+    }
+    parent.menu.conf.length=0;
+    for(new_conf=0;new_conf<temp_config.length;new_conf++)
+    {
+      parent.menu.conf[new_conf]=temp_config[new_conf];
+    }
+    temp_config.length=0;
+    return true;
+  }
+
+  function insert_data()
+  {
+    for(x=0;x<to_insert.length;x++)
+    {
+      parent.menu.conf[parent.menu.conf.length]=to_insert[x];
+    }
+    return true;
+  }
+
+</script>
+
+<center>
+
+<FORM METHOD="POST" NAME="details">
+
+<table border="0">
+
+<tr><td align="right" valign="top"><p>Modules:</td><td><TEXTAREA NAME="loadmodule" ROWS="5" COLS="40"></TEXTAREA></td></tr>
+<tr><td colspan="2"><br><br></td></tr>
+
+
+<tr><td align="right"><p>AccessConfig:</td><td><INPUT TYPE="TEXT" NAME="accessconfig" SIZE="40"></td></tr>
+<tr><td align="right"><p>ResourceConfig:</td><td><INPUT TYPE="TEXT" NAME="resourceconfig" SIZE="40"></td></tr>
+<tr><td colspan="2"><br><br></td></tr>
+
+<tr><td align="right"><p>ServerName:</td><td><INPUT TYPE="TEXT" NAME="servername" SIZE="40"></td></tr>
+<tr><td align="right"><p>ServerRoot:</td><td><INPUT TYPE="TEXT" NAME="serverroot" SIZE="40"></td></tr>
+<tr><td align="right"><p>ServerAdmin:</td><td><INPUT TYPE="TEXT" NAME="serveradmin" SIZE="40"></td></tr>
+<tr><td colspan="2"><br><br></td></tr>
+
+<tr><td align="right"><p>KeepAlive:</td><td><SELECT NAME="keepalive">
+                       <OPTION VALUE="">Not Set
+                       <OPTION VALUE="on">On
+                       <OPTION VALUE="off">Off
+                       </SELECT>
+</td></tr>
+<tr><td align="right"><p>MaxKeepAliveRequests:</td><td><INPUT TYPE="TEXT" NAME="maxkeepaliverequests" SIZE="40"></td></tr>
+<tr><td align="right"><p>KeepAliveTimeout:</td><td><INPUT TYPE="TEXT" NAME="keepalivetimeout" SIZE="40"></td></tr>
+<tr><td colspan="2"><br><br></td></tr>
+
+<tr><td align="right"><p>HostNameLookups:</td><td><SELECT NAME="hostnamelookups">
+                       <OPTION VALUE="">Not Set
+                       <OPTION VALUE="on">On
+                       <OPTION VALUE="off">Off
+                       </SELECT>
+</td></tr>
+<tr><td align="right"><p>MaxRequestsPerChild:</td><td><INPUT TYPE="TEXT" NAME="maxrequestsperchild" SIZE="40"></td></tr>
+<tr><td colspan="2"><br><br></td></tr>
+
+
+<tr><td colspan="2" align="center"><p><INPUT NAME="button" TYPE="BUTTON" VALUE="Make Changes" onClick="make_changes();">&nbsp;&nbsp;<INPUT TYPE="RESET" VALUE="Clear Form" onClick="setTimeout('display_entry()',100);"></td></tr>
+</table>
+
+</body>
+</html>

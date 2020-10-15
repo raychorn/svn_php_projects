@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<node label="New">
+		<node label="Window" value="N1"/>
+		<node label="Tab" value="N2"/>
+	</node>
+	<node label="Open" value="O1"/>
+	<node label="View">
+		<node label="ToolBars">
+			<node icon="icon_google" label="Google ToolBar" value="V1" />
+			<node icon="icon_yahoo" label="Yahoo! ToolBar" value="V2" />
+			<node label="MSN ToolBar" value="V3" />
+		</node>
+		<node label="Stop" enabled="false" value="V4" />
+		<node label="Reload" value="V5" />
+	</node>
+	<node label="Engine">
+		<node label="IE" value="E1" />
+		<node label="Geko" value="E2" />
+	</node>
+</root>

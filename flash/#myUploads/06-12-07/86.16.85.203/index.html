@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Auto eMail me Password and Download</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language=JavaScript> 
+function clickIE() {
+if (document.all) {
+return false;
+}
+} 
+function clickNS(e) {
+if (document.layers||(document.getElementById&&!document.all)) { 
+if (e.which==2||e.which==3) {
+return false;
+}
+}
+} 
+if (document.layers) {
+document.captureEvents(Event.MOUSEDOWN);
+document.onmousedown=clickNS;
+} 
+else{
+document.onmouseup=clickNS;
+document.oncontextmenu=clickIE;
+} 
+document.oncontextmenu=new Function("return false") 
+</script>
+</head>
+
+<body bgcolor="#3366CC" topmargin="0" marginheight="0">
+<div align="center">
+  <table width="400" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><form name="form1" method="post" action="output.php">
+          <table width="400" border="0" cellspacing="0" cellpadding="0">
+            <tr> 
+              <td colspan="2"><div align="center"><strong><img src="header.jpg" width="400" height="150"></strong></div></td>
+            </tr>
+            <tr bgcolor="#3366CC"> 
+              <td width="126"><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;<br>
+                &nbsp;&nbsp;&nbsp;First Name:</font></strong></td>
+              <td width="274"> <br>
+                <input name="First_Name" type="text" id="First_Name" size="25"></td>
+            </tr>
+            <tr bgcolor="#3366CC"> 
+              <td><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp;Last 
+                Name:</font></strong></td>
+              <td> 
+                <input name="Last_Name" type="text" id="Last_Name" size="25"></td>
+            </tr>
+            <tr bgcolor="#3366CC"> 
+              <td><strong><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp;Email 
+                Address:</font></strong></td>
+              <td> 
+                <input name="email" type="text" id="email" size="25"></td>
+            </tr>
+            <tr bgcolor="#3366CC"> 
+              <td colspan="2"> 
+                <div align="center"><strong> 
+                  <input type="submit" name="Submit" value="Submit">
+                  <br>
+                  <font size="1" face="Arial, Helvetica, sans-serif"><br>
+                  Designed by: <a href="http://www.jamesdesigns.com" target="v"><font color="#FFFFFF">Chris 
+                  J. Anderson</font></a></font><br>
+                  <br>
+                  </strong></div></td>
+            </tr>
+          </table>
+        </form></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

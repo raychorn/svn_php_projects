@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Zubie Sample</title>
+
+    <style type="text/css" MEDIA="screen, projection">
+	  #map {
+        width: 800px;
+        height: 600px;
+      }
+    </style>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	
+    <script type="text/javascript">
+		$(function() {
+
+         Number.prototype.toRad = function() {  // convert degrees to radians
+	 return this * Math.PI / 180;
+	 }
+ 
+         Number.prototype.toDeg = function() {  // convert radians to degrees (signed)
+	 return this * 180 / Math.PI;
+ 
+	 }
+          function calculateDistance (ylatFirst,ylonFirst,ylatSecond,ylonSecond) {
+			var R = 6371; // Earth's mean radius in km used by calculateDistance()
+			var dLat = 0;
+			var dLon = 0;
+			var d = 0;
+			var lat1 = "";
+			var lat2 = "";
+			var lon1 = "";
+			var lon2 = "";
+			var i = 0;
+			var z = 0;
+			  dLat = (ylatSecond-ylatFirst).toRad();
+			  dLon = (ylonSecond-ylonFirst).toRad();
+				  ylatFirst_floated = parseFloat(ylatFirst).toRad();
+			  ylatSecond_floated = parseFloat(ylatSecond).toRad();
+				  var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(ylatFirst_floated) * Math.cos(lat2) * 
+					  Math.sin(dLon/2) * Math.sin(dLon/2);
+			  var c = 2 * Math.asin(Math.sqrt(a));
+			return R * c;  // d equals to the distance between the two points in kilometers.
+          }
+ 
+	String.prototype.parseDeg = function() 
+        {
+	  if (!isNaN(this)) return Number(this);                    // signed decimal degrees without NSEW
+	  var degLL = this.replace(/^-/,'').replace(/[NSEW]/i,'');  // strip off any sign or compass dir'n
+	  var dms = degLL.split(/[^0-9.]+/);                        // split out separate d/m/s
+	  for (var i in dms) if (dms[i]=='') dms.splice(i,1);       // remove empty elements (see note below)
+	  switch (dms.length) {                                     // convert to decimal degrees...
+ 
+	  case 3:                                             // interpret 3-part result as d/m/s
+          var deg = dms[0]/1 + dms[1]/60 + dms[2]/3600; break;
+          case 2:                                                         // interpret 2-part result as d/m
+          var deg = dms[0]/1 + dms[1]/60; break;
+          case 1:                                                         // decimal or non-separated dddmmss
+ 
+	  if (/[NS]/i.test(this)) degLL = '0' + degLL;                  // - normalise N/S to 3-digit degrees
+            var deg = dms[0].slice(0,3)/1 + dms[0].slice(3,5)/60 + dms[0].slice(5)/3600; break;
+  	    default: return NaN;
+		  }
+		  if (/^-/.test(this) || /[WS]/i.test(this)) deg = -deg;            // take '-', west and south as -ve
+		  return deg;
+	}
+			
+			// **** CREATE GOOGLE MAP ****
+			var mapCenterF1 = new google.maps.LatLng(52, -2);
+			var mapCenterF2 = new google.maps.LatLng(52.1, -2.3);
+			var mapCenterF3 = new google.maps.LatLng(52, -1.8);
+			var mapCenterF4 = new google.maps.LatLng(52.1, -1.9);
+			var map = new google.maps.Map(document.getElementById('map'), {
+				'zoom': 10,
+				'center': mapCenterF1,
+				'mapTypeId': google.maps.MapTypeId.ROADMAP
+			});
+
+			// **** DRAW CIRCLE ****
+			// Create marker 
+			var markerF1 = new google.maps.Marker({
+			  map: map,
+			  position: mapCenterF1,
+			  title: '(1)'
+			});
+
+			// Add circle overlay and bind to marker (radius in metres)
+			var circleF1 = new google.maps.Circle({
+			  map: map,
+			  radius: 10000,
+			  fillColor: '#AA0000'
+			});
+			circleF1.bindTo('center', markerF1, 'position');
+
+			// Create marker 
+			var markerF2 = new google.maps.Marker({
+			  map: map,
+			  position: mapCenterF2,
+			  title: '(2)'
+			});
+
+			// Add circle overlay and bind to marker (radius in metres)
+			var circleF2 = new google.maps.Circle({
+			  map: map,
+			  radius: 10000,
+			  fillColor: '#00AA00'
+			});
+			circleF2.bindTo('center', markerF2, 'position');
+
+			// Create marker 
+			var markerF3 = new google.maps.Marker({
+			  map: map,
+			  position: mapCenterF3,
+			  title: '(3)'
+			});
+
+			// Add circle overlay and bind to marker (radius in metres)
+			var circleF3 = new google.maps.Circle({
+			  map: map,
+			  radius: 10000,
+			  fillColor: '#0000AA'
+			});
+			circleF3.bindTo('center', markerF3, 'position');
+
+			// Create marker 
+			var markerF4 = new google.maps.Marker({
+			  map: map,
+			  position: mapCenterF4,
+			  title: '(4)'
+			});
+
+			// Add circle overlay and bind to marker (radius in metres)
+			var circleF4 = new google.maps.Circle({
+			  map: map,
+			  radius: 10000,
+			  fillColor: '#000AA0'
+			});
+			circleF4.bindTo('center', markerF4, 'position');
+
+			var marker2 = new google.maps.Marker({
+			  map: map,
+			  position: new google.maps.LatLng(52.1, -2.1),
+			  title: '(P)'
+			});
+			
+			var __status__ = document.getElementById('status');
+			
+			function handle_movement(c) {
+				var d1 = calculateDistance(mapCenterF1.lat(), mapCenterF1.lng(), c.lat(), c.lng());
+				var d2 = calculateDistance(mapCenterF2.lat(), mapCenterF2.lng(), c.lat(), c.lng());
+				var d3 = calculateDistance(mapCenterF3.lat(), mapCenterF3.lng(), c.lat(), c.lng());
+				var d4 = calculateDistance(mapCenterF4.lat(), mapCenterF4.lng(), c.lat(), c.lng());
+				var s = '';
+				if (d1 <= 10) {
+					s += ' inside (1) ';
+				}
+				if (d2 <= 10) {
+					s += ' inside (2) ';
+				}
+				if (d3 <= 10) {
+					s += ' inside (3) ';
+				}
+				if (d4 <= 10) {
+					s += ' inside (4) ';
+				}
+				if ( (d1 > 10) && (d2 > 10) && (d3 > 10) && (d4 > 10) ) {
+					s = 'outside';
+				}
+				__status__.innerHTML = s;
+			}
+			
+			google.maps.event.addListener(map, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+
+			google.maps.event.addListener(circleF1, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+  			
+			google.maps.event.addListener(markerF1, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+  			
+			google.maps.event.addListener(circleF2, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+  			
+			google.maps.event.addListener(markerF2, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+  			
+			google.maps.event.addListener(circleF3, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+  			
+			google.maps.event.addListener(markerF3, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+  			
+			google.maps.event.addListener(circleF4, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+  			
+			google.maps.event.addListener(markerF4, 'click', function(event) {
+				marker2.setPosition(event.latLng);
+				handle_movement(event.latLng);
+			});
+  			
+		});
+		
+		function handleError(message)
+		{
+			alert(message);
+		}
+    </script>
+  </head>
+  <body>
+    <h1>Sample for Zubie</h1>
+    <div id="status"></div>
+    <div id="map"></div>
+  </body>
+</html>

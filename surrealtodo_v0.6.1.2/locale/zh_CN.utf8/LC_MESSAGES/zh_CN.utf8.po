@@ -1,0 +1,370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-11-15 13:10-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: index.php:18
+msgid "requires PHP 5.2 or greater.  Your version is"
+msgstr "需要5.2或更高版本PHP。您的版本是"
+
+#: index.php:63
+msgid "Notebook"
+msgstr "记事本"
+
+#: index.php:64
+msgid "Trash"
+msgstr "垃圾桶"
+
+#: index.php:65
+msgid "Settings"
+msgstr "设置"
+
+#: index.php:68
+msgid "Search"
+msgstr "搜索"
+
+#: todo.class.php:232 todo.class.php:446
+msgid "New Item"
+msgstr "新项目"
+
+#: todo.class.php:634 content/notebook.php:8
+msgid "New Tab"
+msgstr "新选项卡"
+
+#: todo.class.php:432 content/notebook.php:9
+msgid "New List"
+msgstr "新列表"
+
+msgid "Are you sure you want to delete this item?"
+msgstr "确定要删除此项目吗？"
+
+#: content/notebook.php:29
+msgid "All Items in this List will be deleted."
+msgstr "该列表中的所有项都将被删除。"
+
+#: content/notebook.php:30
+msgid "All Lists and Items on this Page will be deleted."
+msgstr "此页面中的所有列表和项目都将被删除。"
+
+#: content/notebook.php:31
+msgid "All Pages, Lists and Items on this Tab will be deleted."
+msgstr "此选项卡中的所有页面，列表和项目都将被删除。"
+
+#: content/menus.php:3 content/menus.php:18 content/menus.php:40
+#: content/menus.php:58
+msgid "Edit"
+msgstr "编辑"
+
+#: content/menus.php:5 content/menus.php:27 content/menus.php:42
+#: content/menus.php:64
+msgid "Delete"
+msgstr "删除"
+
+#: content/menus.php:7 content/menus.php:29 content/menus.php:44
+msgid "Duplicate"
+msgstr "复制"
+
+#: content/menus.php:9 content/menus.php:31 content/menus.php:49
+#: content/menus.php:66
+msgid "Created"
+msgstr "新建"
+
+#: content/menus.php:11 content/menus.php:33 content/menus.php:51
+#: content/menus.php:68 content/menus.php:73
+msgid "Set"
+msgstr "设置"
+
+msgid "Indent"
+msgstr "缩进"
+
+msgid "Remove Indent"
+msgstr "移除缩进"
+
+msgid "Font"
+msgstr "字体"
+
+msgid "Color"
+msgstr "颜色"
+
+msgid "Red"
+msgstr "红色"
+
+msgid "Green"
+msgstr "绿色"
+
+msgid "Blue"
+msgstr "蓝色"
+
+msgid "Normal"
+msgstr "标准字体"
+
+msgid "Style"
+msgstr "字体样式"
+
+#: content/settings.php:206
+msgid "Italic"
+msgstr "斜体"
+
+msgid "Weight"
+msgstr "字体大小"
+
+msgid "Bold"
+msgstr "字体加粗"
+
+msgid "Large"
+msgstr "大"
+
+#: content/menus.php:61
+msgid "Mark Complete"
+msgstr "标记为完成"
+
+#: content/menus.php:62
+msgid "Mark Incomplete"
+msgstr "标记为未完成"
+
+msgid "Hyperlink"
+msgstr "超链接"
+
+#: content/menus.php:71
+msgid "Completed"
+msgstr "已完成"
+
+#: content/settings.php:39
+msgid "Site Name"
+msgstr "站点名称"
+
+#: content/settings.php:47
+msgid "Date Format"
+msgstr "日期格式"
+
+msgid "Default Page"
+msgstr "默认页"
+
+#: todo.class.php:815
+msgid "New Page"
+msgstr "新页面"
+
+#: content/settings.php:72
+msgid "Time Format"
+msgstr "时间格式"
+
+#: content/settings.php:89 content/settings.php:90
+msgid "Time Zone"
+msgstr "时区"
+
+#: content/settings.php:105 content/settings.php:106 content/install.php:20
+msgid "Language"
+msgstr "语言"
+
+#: content/settings.php:150
+msgid "Theme"
+msgstr "主题"
+
+#: content/settings.php:218
+msgid "Save"
+msgstr "保存"
+
+#: content/search.php:4
+msgid "Search Results"
+msgstr "搜索结果"
+
+#: content/search.php:13 content/trash.php:12
+msgid "Legend"
+msgstr "示例"
+
+#: content/search.php:15 content/trash.php:14
+msgid "Folder"
+msgstr "文件夹"
+
+#: content/search.php:17 content/trash.php:16
+msgid "Page"
+msgstr "页面"
+
+#: content/search.php:19 content/trash.php:18
+msgid "List"
+msgstr "列表"
+
+#: content/search.php:21 content/trash.php:20
+msgid "Item"
+msgstr "项目"
+
+#: content/trash.php:3
+msgid "Empty Trash"
+msgstr "清空垃圾桶"
+
+#: content/trash.php:4
+msgid "Select All"
+msgstr "全选"
+
+#: content/trash.php:5
+msgid "Delete Selected"
+msgstr "删除所选项"
+
+#: content/trash.php:6
+msgid "Restore Selected"
+msgstr "还原所选项"
+
+#: content/trash.php:28
+msgid "Black - Parent (not deleted)"
+msgstr "黑色-主项目(不会被删除)"
+
+#: content/trash.php:29
+msgid "Red - Deleted Object"
+msgstr "红色 - 已删除项目"
+
+#: content/trash.php:30
+msgid "Blue - Deleted Child Object"
+msgstr "蓝色 - 已删除的子项目"
+
+#: content/install.php:62
+msgid "Installation"
+msgstr "安装"
+
+#: content/install.php:66 content/upgrade.php:22
+msgid "Database connection failed."
+msgstr "连接数据库失败。"
+
+#: content/install.php:67 content/upgrade.php:23
+msgid "Edit connect.php and set the mysql database connection information."
+msgstr "打开connect.php并设置相关mysql数据库连接信息。"
+
+#: content/install.php:73
+msgid "The database is not empty."
+msgstr "数据库非空"
+
+#: content/install.php:74
+msgid "This install script will not continue."
+msgstr "此安装脚本无法继续。"
+
+#: content/install.php:75
+msgid "currently does not support sharing a database."
+msgstr "目前并不支持共享数据库。"
+
+#: content/install.php:79
+msgid "This script will create the needed tables in your database."
+msgstr "此脚本将会在你的数据库中建立所需的表。"
+
+#: content/install.php:83
+msgid "Install"
+msgstr "安装"
+
+#: todo.class.php:643 content/install.php:142
+msgid "Main Page"
+msgstr "主页面"
+
+#: todo.class.php:285
+msgid "Double-click to edit"
+msgstr "双击开始编辑"
+
+#: content/install.php:124
+msgid "Main Tab"
+msgstr "主选项卡"
+
+#: content/upgrade.php:5 content/upgrade.php:13 content/upgrade.php:91
+msgid "Upgrade"
+msgstr "升级"
+
+#: content/upgrade.php:77
+msgid "Unable to upgrade versions prior to v0.3"
+msgstr "无非升级v0.3之前的版本"
+
+#: content/upgrade.php:81
+msgid "Upgrade is not needed."
+msgstr "无需升级。"
+
+#: content/install.php:48 content/upgrade.php:82 content/upgrade.php:276
+msgid "Continue"
+msgstr "继续"
+
+#: content/upgrade.php:86
+msgid "This script will upgrade your database from version"
+msgstr "此版本将升级你的数据库"
+
+#: content/upgrade.php:87
+msgid "Please!  Backup your database before updating."
+msgstr "请在安装前备份你的数据库!!!"
+
+#: content/upgrade.php:98
+msgid "Unable to upgrade."
+msgstr "无法升级。"
+
+#: content/upgrade.php:100
+msgid "Your database is at a higher revision than the application."
+msgstr "您使用的Surreal TODO数据库版本高于当前程序版本。"
+
+#: content/upgrade.php:103
+msgid "Unable to determine the version of your database."
+msgstr "无法确定您正在使用的Surreal TODO数据库版本。"
+
+#: content/upgrade.php:275
+msgid "Upgrade Complete"
+msgstr "完成升级"
+
+#: content/notebook.php:29
+msgid "Delete Entire List?"
+msgstr "删除整个列表?"
+
+#: content/notebook.php:30
+msgid "Delete Entire Page?"
+msgstr "删除整个页面?"
+
+#: content/notebook.php:31
+msgid "Delete Entire Tab?"
+msgstr "删除整个选项卡？"
+
+#: content/menus.php:19
+msgid "Columns per Page"
+msgstr ""
+
+#: content/menus.php:46
+msgid "Show Item Dates"
+msgstr ""
+
+#: content/menus.php:47
+msgid "Hide Item Dates"
+msgstr ""
+
+#: content/menus.php:59
+msgid "Advanced Edit"
+msgstr ""
+
+#: content/settings.php:202
+msgid "Completed Item Format"
+msgstr ""
+
+#: content/settings.php:204
+msgid "Strikethrough"
+msgstr ""
+
+#: content/settings.php:208
+msgid "Gray"
+msgstr ""
+
+#: content/settings.php:210
+msgid "Checkmark"
+msgstr ""
+
+#: content/search.php:194
+msgid "No matches found"
+msgstr ""
+
+#: content/search.php:232 content/trash.php:210
+msgid "text trimmed"
+msgstr ""
+
+#: content/trash.php:61
+msgid "Trash is Empty"
+msgstr ""
